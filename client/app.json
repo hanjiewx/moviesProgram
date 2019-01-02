@@ -1,0 +1,20 @@
+{
+  "pages":[
+    "pages/home/home",
+    "pages/hotMovies/hotMovies",
+    "pages/user/user",
+    "pages/movieDetail/movieDetail",
+    "pages/commentDetail/commentDetail",
+    "pages/commentList/commentList",
+    "pages/editComment/editComment",
+    "pages/previewComment/previewComment"
+  ],
+ 
+  "window":{
+    "backgroundColor":"#F6F6F6",
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "Wafer Quick Start",
+    "navigationBarTextStyle":"black"
+  }
+}

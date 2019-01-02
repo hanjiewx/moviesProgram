@@ -1,0 +1,86 @@
+/* pages/movieDetail/movieDetail.wxss */
+.all-wrapper{
+  width:750rpx;
+  height:1280rpx;
+  background-color: azure;
+}
+.movie-image{
+  width:250rpx;
+  height:350rpx;
+  margin-left: 250rpx;
+  margin-top: 50rpx;
+  position:absolute;
+}
+.textAndBtn-wrapper{
+  background-color: white;
+  padding-top:300rpx;
+  padding-left: 20rpx;
+  padding-right:20rpx;
+  width:630rpx;
+  height:700rpx;
+  border:2px solid rgb(230, 223, 223);
+  margin-top:120rpx; 
+  margin-left:38rpx; 
+  position:absolute;
+}
+
+.text-wrapper{
+ height:500rpx;  
+}
+.title{
+  text-align: center;
+  font-weight: bold
+}
+.btn-wrapper{
+  font-size:30rpx; 
+  display:flex;
+}
+.checkComment{
+padding-top:20rpx;
+padding-left:20rpx;
+padding-right:20rpx;
+padding-bottom:25rpx;
+margin-top:80rpx;
+margin-left:100rpx;
+border:2px solid rgb(230, 223, 223);
+}
+.addComment{
+padding-top:20rpx;
+padding-left:20rpx;
+padding-right:20rpx;
+padding-bottom:25rpx;
+margin-top:80rpx;
+margin-left:150rpx;
+border:2px solid rgb(230, 223, 223);
+}
+
+.all-wrapper2{
+ width:750rpx;
+ height:855rpx;
+ background-color: grey;  
+}
+.textAndBtn-wrapper2{
+  padding-top:300rpx;
+  padding-left: 20rpx;
+  padding-right:20rpx;
+  width:630rpx;
+  height:430rpx;
+  margin-top:120rpx; 
+  margin-left:38rpx; 
+  position:absolute; 
+}
+
+.textAndSound{
+  text-align: center;
+ margin-top: 40rpx;
+ border-bottom:2px solid rgb(230, 223, 223);
+}
+
+.btn-sound{
+margin-top:40rpx;
+padding-bottom: 30rpx;
+}
+.btn-cancle{
+  text-align: center;
+ margin-top:30rpx
+}

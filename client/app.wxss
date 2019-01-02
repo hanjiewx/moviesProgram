@@ -1,0 +1,46 @@
+/**app.wxss**/
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+} 
+.unlogin-card {
+  margin: 50rpx 27rpx 0;
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+  border-radius: 13rpx;
+  display: flex;
+  border: 1rpx solid rgb(223, 221, 221)
+}
+
+.unlogin-info {
+  margin-left: 20rpx;
+ margin-top: 80rpx;
+  align-items: center;
+  height: 200rpx;
+}
+
+.unlogin-head {
+  flex-shrink: 0;
+   margin-top: 80rpx;
+  margin-left: 53rpx;
+  height: 100rpx;
+  width: 100rpx;
+  background: #F5E069;
+  border-radius: 50%;
+}
+.unlogin-text{
+font-size:35rpx;
+line-height: 49rpx;
+}
+.unlogin-tips{
+font-size:30rpx;
+line-height: 42rpx;
+margin-top: 18rpx;
+  }
+
+.unlogin-btn{
+  margin-top: 50rpx;
+  width:300rpx;
+}

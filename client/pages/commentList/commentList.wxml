@@ -1,0 +1,9 @@
+<navigator url='../commentDetail/commentDetail?id={{item.id}}'>
+<view class='comment-card' wx:for="{{commentList}}" wx:key="{{item.id}}">
+<view class='userInfo'>
+<image class="user-head" src='{{item.avatar}}'></image>
+<view class="user-name" >{{item.username}}</view>
+</view>
+<view class="comment">{{comment}}</view>
+</view>
+</navigator>

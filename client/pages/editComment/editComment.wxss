@@ -1,0 +1,74 @@
+.all-wrapper{
+  width:750rpx;
+  height:1280rpx;
+  background-color: azure;}
+  
+.movie-image{
+  width:250rpx;
+  height:350rpx;
+  margin-left: 250rpx;
+  margin-top: 50rpx;
+  position:absolute;
+}
+.textAndBtn-wrapper{
+  background-color: white;
+  padding-top:300rpx;
+  padding-left: 20rpx;
+  padding-right:20rpx;
+  width:630rpx;
+  height:600rpx;
+  border:2px solid rgb(230, 223, 223);
+  margin-top:120rpx; 
+  margin-left:38rpx; 
+  position:absolute;
+}
+
+.text-wrapper{
+ height:500rpx;  
+}
+.title{
+  text-align: center;
+  font-weight: bold
+}
+.comment-wrapper{
+  height:400rpx;
+  margin-top: 30rpx;
+
+}
+.comment-ipt{
+  width:619rpx;
+
+  font-size:32rpx;
+}
+.comment-placeholder{
+  font-size: 30rpx;
+}
+.btn-record{
+  margin-top:30rpx;
+  margin-left:220rpx;
+  width:160rpx;
+  height:60rpx;
+  font-size:35rpx;
+  padding-top:20rpx;
+  padding-left:20rpx;
+  border:2px solid rgb(230, 223, 223);
+}
+.btn-finish{
+ position: absolute;
+ text-align: center;
+ margin-top: 1080rpx;
+ width:750rpx;
+ height:76rpx;
+ padding-top: 25rpx;
+ background-color: rgb(25, 235, 88)
+}
+.btn-finishdis {
+ position: absolute;
+ text-align: center;
+ margin-top: 1080rpx;
+ width:750rpx;
+ height:76rpx;
+ padding-top: 25rpx;
+ color: rgba(52, 55, 61, 0.5);
+background-color: rgb(25, 235, 88)
+}

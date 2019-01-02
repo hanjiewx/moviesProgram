@@ -1,0 +1,81 @@
+.all-wrapper{
+  width:750rpx;
+  height:1280rpx;
+  background-color: azure;
+}
+.movie-image{
+  width:250rpx;
+  height:350rpx;
+  margin-left: 250rpx;
+  margin-top: 50rpx;
+  position:absolute;
+}
+.textAndBtn-wrapper{
+  background-color: white;
+  padding-top:300rpx;
+  padding-left: 20rpx;
+  padding-right:20rpx;
+  width:630rpx;
+  height:700rpx;
+  border:2px solid rgb(230, 223, 223);
+  margin-top:120rpx; 
+  margin-left:38rpx; 
+  position:absolute;
+}
+
+.text-wrapper{
+ height:500rpx;  
+}
+.title{
+  text-align: center;
+  font-weight: bold
+}
+.comment-wrapper{
+  width:619rpx;
+  position:absolute;
+  height:500rpx;
+  margin-top: 30rpx;
+}
+.userHeadName{
+ width:619rpx;
+ height:120rpx;
+ display:flex;
+}
+.user-head{
+  flex-shrink: 0;
+  margin-left: 53rpx;
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50%;
+}
+.user-name{
+padding-top: 10rpx;
+margin-left: 30rpx;
+}
+.commentValue{
+margin-left: 30rpx;
+margin-right: 30rpx;
+font-size: 32rpx;
+}
+.btn-wrapper{
+  font-size:30rpx; 
+  display:flex;
+}
+.reEdit{
+padding-top:20rpx;
+padding-left:20rpx;
+padding-right:20rpx;
+padding-bottom:25rpx;
+margin-top:80rpx;
+margin-left:100rpx;
+border:2px solid rgb(230, 223, 223);
+}
+.addComment{
+padding-top:20rpx;
+padding-left:20rpx;
+padding-right:20rpx;
+padding-bottom:25rpx;
+margin-top:80rpx;
+margin-left:150rpx;
+border:2px solid rgb(230, 223, 223);
+}
