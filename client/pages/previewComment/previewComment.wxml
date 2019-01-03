@@ -24,7 +24,8 @@
 </view>
 </view>
 <view class='btn-wrapper'>
-<navigator url="../editComment/editComment?id={{id}}&title={{title}}&image={{image}}&commentValue={{commentValue}}">
+
+<navigator open-type='navigateBack' delta='1'>
 <view class='reEdit'>重新编辑</view>
 </navigator>
 <view class='addComment' bindtap='addComment'>发布影评</view>

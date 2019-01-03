@@ -69,18 +69,22 @@ border:2px solid rgb(230, 223, 223);
   margin-left:38rpx; 
   position:absolute; 
 }
-
-.textAndSound{
-  text-align: center;
- margin-top: 40rpx;
- border-bottom:2px solid rgb(230, 223, 223);
+.userInfo{
+margin-top: 70rpx;
+display:flex;
 }
-
-.btn-sound{
-margin-top:40rpx;
-padding-bottom: 30rpx;
+.user-head{
+  flex-shrink: 0;
+  margin-left: 53rpx;
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50%;
 }
-.btn-cancle{
-  text-align: center;
- margin-top:30rpx
+.user-name{
+padding-top: 10rpx;
+margin-left: 30rpx;
+}
+.comment{
+  margin-top: 30rpx;
+  margin-left:53rpx;
 }

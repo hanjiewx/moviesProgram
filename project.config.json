@@ -64,10 +64,10 @@
 					"query": "id=1"
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "影评列表",
 					"pathName": "pages/commentList/commentList",
-					"query": ""
+					"query": "id=1"
 				}
 			]
 		}

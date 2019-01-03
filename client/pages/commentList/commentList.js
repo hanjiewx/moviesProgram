@@ -30,8 +30,11 @@ Page({
             })
           })
         }
-        console.log('success')
+       console.log(this.data.commentList)
       },
+      fail:error=>{
+        console.error(error)
+      }
     })
   },
   /**
@@ -42,7 +45,7 @@ Page({
       id:options.id
     })
   this.getCommentList(this.data.id)
-  console.log(this.data.id)
+  
   },
 
   /**

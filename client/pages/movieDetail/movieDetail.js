@@ -54,15 +54,17 @@ Page({
   },
 
   addComment(){
+    let id=this.data.id
+    let title=this.data.movie.title
+    let image = this.data.movie.image
     wx.showActionSheet({
       itemList: ['文字', '音频'],
       success(res) {
-        console.log(this.data.id)
-        // if(res.tapIndex==0){
-        //   wx.navigateTo({
-        //     url: '../editComment/editComment?id='+this.data.id,
-        //   })
-        // }
+        if(res.tapIndex==0){
+          wx.navigateTo({
+            url: '../editComment/editComment?id='+id+'&title='+title+'&image='+image,
+          })
+        }
       },
       fail(res) {
         console.log(res.errMsg)

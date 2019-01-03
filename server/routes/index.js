@@ -41,4 +41,8 @@ router.put('/comment', validationMiddleware, controllers.comment.add)
 router.post('/comment', validationMiddleware, controllers.comment.favorite)
 // 获取影评列表
 router.get('/comment', controllers.comment.list)
+// 获取发布列表
+router.get('/comment', controllers.comment.releaseList)
+// 获取收藏列表
+router.get('/comment', controllers.comment.favoriteList)
 module.exports = router

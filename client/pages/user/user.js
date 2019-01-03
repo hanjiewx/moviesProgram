@@ -1,4 +1,7 @@
 // pages/user/user.js
+const qcloud = require('../../vendor/wafer2-client-sdk/index')
+const config = require('../../config')
+const _ = require('../../utils/util')
 const app = getApp()
 
 Page({
@@ -7,8 +10,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    columnTitle:['我的发布','我的收藏'],
     userInfo: null,
-    locationAuthType: app.data.locationAuthType
+    locationAuthType: app.data.locationAuthType,
+    releaseList: '',
+    favoriteList:'',
+    id: ''
   },
 
   
@@ -16,20 +23,74 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  console.log(this.data.userInfo)
   },
 
   onTapLogin: function () {
-
+    app.login({
+      success: ({ userInfo }) => {
         this.setData({
           userInfo,
           locationAuthType: app.data.locationAuthType,
         })
-  
-   
+      },
+      error: () => {
+        this.setData({
+          locationAuthType: app.data.locationAuthType
+        })
+      }
+    })
   },
 
+  getReleaseList(user) {
+    qcloud.request({
+      url: config.service.releaseList,
+      data: {
+        user: user
+      },
+      success: result => {
+        let data = result.data
+        if (!data.code) {
+          this.setData({
+            releaseList: data.data.map(item => {
+              let itemDate = new Date(item.create_time)
+              item.createTime = _.formatTime(itemDate)
+              return item
+            })
+          })
+        }
+        console.log(result)
+        console.log(this.data.releaseList)
+      },
+    })
+  },
 
+  getFavoriteList() {
+    qcloud.request({
+      url: config.service.favoriteList,
+      success: result => {
+        let data = result.data
+        if (!data.code) {
+          this.setData({
+            favoriteList: data.data.map(item => {
+              let itemDate = new Date(item.create_time)
+              item.createTime = _.formatTime(itemDate)
+              return item
+            })
+          })
+        }
+        console.log(result)
+        console.log(this.data.favoriteList)
+      },
+    })
+  },
+
+  ontapMyRelease(){
+    console.log(this.data.userInfo.openId)
+    this.getReleaseList(this.data.userInfo.openId)
+  },
+  ontapMyFavorite() {
+    this.getFavoriteList()
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -50,7 +111,6 @@ Page({
         this.setData({
           userInfo
         })
-        console.log(this.data.userInfo)
       }
     })
 

@@ -47,9 +47,29 @@ module.exports = {
     let movieId = +ctx.request.query.movie_id
 
     if (!isNaN(movieId)) {
-      ctx.state.data = await DB.query('select * from comment where movieComment.movie_id = ?', [movieId])
+      ctx.state.data = await DB.query('select * from movieComment where movieComment.movie_id =?', [movieId])
     } else {
-      ctx.state.data = await DB.query('select * from comment where movieComment.movie_id = ?', [movieId])
+      ctx.state.data =[]
     }
+
+  },
+  /**
+   * 获取发布列表
+   */
+  releaseList: async ctx => {
+    let user = ctx.request.query.user
+
+    if (user) {
+      ctx.state.data = await DB.query('select * from movieComment where movieComment.user= ?', [user])
+    } else {
+      ctx.state.data =[]
+    }
+    ctx.state.data = {'query':`select * from movieComment where movieComment.user =${user}`}
+  },
+  /**
+   * 获取收藏列表
+   */
+  favoriteList: async ctx => {
+    ctx.state.data = await DB.query("SELECT * FROM favoriteComment")
   },
 }
