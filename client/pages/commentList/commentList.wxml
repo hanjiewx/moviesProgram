@@ -5,7 +5,8 @@
 <image class="user-head" src='{{item.avatar}}'></image>
 <view class="user-name" >{{item.username}}</view>
 </view>
-<view class="comment">{{item.content}}</view>
+<view class="comment" wx:if="{{item.content}}">{{item.content}}</view>
+<view class='record' wx:if="{{item.record}}">点击播放</view>
 </navigator>
 </view>
 

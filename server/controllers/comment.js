@@ -12,12 +12,13 @@ module.exports = {
 
     let movieId = +ctx.request.body.movie_id
     let content = ctx.request.body.content || null
+    let record = ctx.request.body.record || null
 
     if (!isNaN(movieId)) {
-      await DB.query('INSERT INTO movieComment(user, username, avatar, content,  movie_id) VALUES (?, ?, ?, ?, ?)', [user, username, avatar, content, movieId])
+      await DB.query('INSERT INTO movieComment(user, username, avatar, content, record, movie_id) VALUES (?, ?, ?, ?, ?)', [user, username, avatar, content, record,movieId])
     }
 
-    ctx.state.data = { 'query': `INSERT INTO movieComment(user, username, avatar, content,  movie_id) VALUES (${user}, ${username},${avatar} , ${content}, ${movieId})`,
+    ctx.state.data = { 'query': `INSERT INTO movieComment(user, username, avatar, content, record, movie_id) VALUES (${user}, ${username},${avatar} , ${content},${record}, ${movieId})`,
     'user':user,
     'username':username,
     'avatar':avatar,

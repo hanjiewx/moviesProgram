@@ -81,6 +81,9 @@ Page({
         console.log(result)
         console.log(this.data.favoriteList)
       },
+      fail:error=>{
+        console.error(error)
+      }
     })
   },
 

@@ -1,6 +1,7 @@
 // pages/previewComment/previewComment.js
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
+const innerAudioContext = wx.createInnerAudioContext()
 const app = getApp()
 Page({
 
@@ -10,9 +11,12 @@ Page({
   data: {
     userInfo:null,
     commentValue:'',
+    recordValue:'',
+    duration:'',
     title:'',
     image:'',
-    id:''
+    id:'',
+    record:''
   },
 
   onTapLogin: function () {
@@ -31,60 +35,147 @@ Page({
     })
   },
 
-  addComment(event) {
-    if (!this.data.commentValue) return
+  onTapPlay(){
+    innerAudioContext.src =this.data.recordValue+'='+this.data.duration+'.aac'
+    innerAudioContext.play()
+    this.setData({ record: innerAudioContext.src})
+    console.log('record',this.data.record)
+  },
 
+  addComment(event) {
     wx.showLoading({
       title: '正在发表评论'
     })
+    if (this.data.commentValue) {
+      qcloud.request({
+        url: config.service.addComment,
+        login: true,
+        method: 'PUT',
+        data: {
+          content: this.data.commentValue,
+          movie_id: this.data.id
+        },
+        success: result => {
+          wx.hideLoading()
 
-    qcloud.request({
-      url: config.service.addComment,
-      login: true,
-      method: 'PUT',
-      data: {
-        content: this.data.commentValue,
-        movie_id: this.data.id
-      },
-      success: result => {
-        wx.hideLoading()
+          let data = result.data
+          if (!data.code) {
+            wx.showToast({
+              title: '发表评论成功'
+            })
 
-        let data = result.data
-        if (!data.code) {
-          wx.showToast({
-            title: '发表评论成功'
-          })
-          
-        } else {
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '发表评论失败'
+            })
+          }
+        },
+        fail: () => {
+          wx.hideLoading()
+
           wx.showToast({
             icon: 'none',
             title: '发表评论失败'
           })
         }
-      },
-      fail: () => {
-        wx.hideLoading()
+      })}
+    if(this.data.recordValue){
+      this.uploadRecord(record => {
+        qcloud.request({
+          url: config.service.addComment,
+          login: true,
+          method: 'PUT',
+          data: {
+            record,
+            content,
+            movie_id: this.data.id
+          },
+          success: result => {
+            wx.hideLoading()
 
-        wx.showToast({
-          icon: 'none',
-          title: '发表评论失败'
+            let data = result.data
+
+            if (!data.code) {
+              wx.showToast({
+                title: '发表评论成功'
+              })
+
+              setTimeout(() => {
+                wx.navigateBack()
+              }, 1500)
+            } else {
+              wx.showToast({
+                icon: 'none',
+                title: '发表评论失败'
+              })
+            }
+          },
+          fail: () => {
+            wx.hideLoading()
+
+            wx.showToast({
+              icon: 'none',
+              title: '发表评论失败'
+            })
+          }
         })
-      }
-    })
-    wx.navigateTo({
-      url: '../commentList/commentList?id='+this.data.id,
-    })
+      })
+    }
+    // wx.navigateTo({
+    //   url: '../commentList/commentList?id='+this.data.id,
+    // })
   },
+
+  uploadRecord(cb) {
+    let recordValue = this.data.record
+    console.log(recordValue)
+    let record=[]
+    if (recordValue) {
+        wx.uploadFile({
+          url: config.service.uploadUrl,
+          filePath: recordValue,
+          name: 'file',
+          success: res => {
+            let data = JSON.parse(res.data)
+            console.log(res)
+              // if (!data.code) {
+              // record.push(data.data.record)
+              //   cb && cb(record)
+              // }
+
+          },
+          fail: (e) => {
+           console.error(e)
+          }
+        }) 
+    }
+     else {
+      cb && cb(record)
+    }
+  },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   this.setData({
-     commentValue: options.commentValue,
-     title: options.title,
-     image: options.image,
-     id:options.id
-   })
+    if (options.commentValue) {
+      this.setData({
+        commentValue: options.commentValue,
+        title: options.title,
+        image: options.image,
+        id: options.id
+      })}
+    if (options.recordValue) {
+      this.setData({
+        recordValue: options.recordValue,
+        duration:options.duration,
+        title: options.title,
+        image: options.image,
+        id: options.id
+      })
+    }
   },
 
   /**

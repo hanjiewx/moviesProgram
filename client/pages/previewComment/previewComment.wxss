@@ -57,6 +57,14 @@ margin-left: 30rpx;
 margin-right: 30rpx;
 font-size: 32rpx;
 }
+.recordValue{
+margin-left: 200rpx;
+border:2px solid rgb(230, 223, 223);
+width:200rpx;
+padding-top: 20rpx;
+padding-bottom: 20rpx;  
+padding-left:50rpx;
+}
 .btn-wrapper{
   font-size:30rpx; 
   display:flex;

@@ -33,11 +33,13 @@ const CONF = {
          * 地区简称
          * @查看 https://cloud.tencent.com/document/product/436/6224
          */
-        region: 'ap-guangzhou',
+      region: 'ap-shanghai',
         // Bucket 名称
-        fileBucket: 'qcloudtest',
+      fileBucket: 'product-1258339089',
         // 文件夹
-        uploadFolder: ''
+      uploadFolder: 'audios',
+      //上传文件类型
+      mimetypes: ['audio/aac', 'audio/x-aac', 'audio/mpeg', 'audio/mp3', 'audio/m4a','image/jpg', 'image/jepg', 'image/png']
     },
 
     // 微信登录态有效期

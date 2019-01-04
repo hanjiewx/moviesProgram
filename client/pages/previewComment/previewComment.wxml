@@ -20,7 +20,8 @@
 <image class='user-head' src="{{userInfo.avatarUrl}}"></image>
 <view class='user-name'>{{userInfo.nickName}}的影评</view>
 </view>
-<view class='commentValue'>{{commentValue}}</view>
+<view class='commentValue' wx:if="{{commentValue}}">{{commentValue}}</view>
+<view class='recordValue' bindtap="onTapPlay" wx:if="{{recordValue}}">点击播放</view>
 </view>
 </view>
 <view class='btn-wrapper'>

@@ -16,13 +16,13 @@
 <view class="text-wrapper">
 <view class='title'>{{title}}</view>
 <view class='comment-wrapper'>
-<textarea class='comment-ipt' value='{{commentValue}}' placeholder-class='comment-placeholder' placeholder='输入你的影评内容' bindinput='onInput'></textarea>
-<view class='btn-record' >点击录音</view>
+<textarea class='comment-ipt' value='{{commentValue}}' placeholder-class='comment-placeholder' placeholder='输入你的影评内容' bindinput='onInput' wx:if="{{tapIndex==0}}"></textarea>
+<button type="primary" bindtouchstart="startRecode" bindtouchend="endRecode" class="cxbtn" wx:if="{{tapIndex==1}}">按住录音</button>
 </view>
 
 </view>
 </view>
 <image class='movie-image' src="{{image}}"></image>
-<view class="btn-finish{{!commentValue?'dis':''}}" bindtap="previewComment">完成</view>
+<view class="btn-finish{{!(commentValue||recordValue)?'dis':''}}" bindtap="previewComment">完成</view>
 </view>
 
