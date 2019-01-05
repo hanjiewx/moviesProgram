@@ -1,5 +1,6 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
+const _ = require('../../utils/util')
 const app = getApp()
 
 Page({
@@ -10,9 +11,12 @@ Page({
   data: {
     movie: '',
     id: '',
+    userInfo:'',
     userName:'',
     userHead:'',
-    comment:''
+    comment:'',
+    commentList:'',
+   
   },
 
   getMovieDetail(id) {
@@ -54,26 +58,38 @@ Page({
   },
 
   addComment() {
-    let id = this.data.id
-    let title = this.data.movie.title
-    let image = this.data.movie.image
-
-    wx.showActionSheet({
-      itemList: ['文字', '音频'],
-      success(res) {
-        if (res.tapIndex == 0 || 1) {
-          wx.navigateTo({
-            url: '../editComment/editComment?id=' + id + '&title=' + title + '&image=' + image + '&tapIndex=' + res.tapIndex,
-          })
-        }
-
-      },
-      fail(res) {
-        console.log(res.errMsg)
+    for (let i = 0; i < this.data.commentList.length; i++) {
+      if (this.data.commentList[i].user == this.data.userInfo.openId) {
+        console.log('j>0')
+        wx.navigateTo({
+          url: '../myRelease/myRelease?id=' + this.data.id
+        })
       }
-    })
 
+      else {
+        console.log('j=0')
+        let id = this.data.id
+        let title = this.data.movie.title
+        let image = this.data.movie.image
+
+        wx.showActionSheet({
+          itemList: ['文字', '音频'],
+          success(res) {
+            if (res.tapIndex == 0 || 1) {
+              wx.navigateTo({
+                url: '../editComment/editComment?id=' + id + '&title=' + title + '&image=' + image + '&tapIndex=' + res.tapIndex,
+              })
+            }
+
+          },
+          fail(res) {
+            console.log(res.errMsg)
+          }
+        })
+      }
+    }
   },
+
   addFavorite(){
       wx.showLoading({
         title: '正在收藏评论'
@@ -114,6 +130,31 @@ Page({
       })
     },
   
+  getCommentList(id) {
+    qcloud.request({
+      url: config.service.commentList,
+      data: {
+        movie_id: id
+      },
+      success: result => {
+        let data = result.data
+        if (!data.code) {
+          this.setData({
+            commentList: data.data.map(item => {
+              let itemDate = new Date(item.create_time)
+              item.createTime = _.formatTime(itemDate)
+              return item
+            })
+          })
+        }
+        console.log(this.data.commentList)
+      },
+      fail: error => {
+        console.error(error)
+      }
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -126,7 +167,7 @@ Page({
       comment:options.comment
     })
     this.getMovieDetail(this.data.id)
-    console.log(options.userName)
+    this.getCommentList(this.data.id)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -144,7 +185,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      locationAuthType: app.data.locationAuthType
+    })
+    app.checkSession({
+      success: ({
+        userInfo
+      }) => {
+        this.setData({
+          userInfo
+        })
+      }
+    })
   },
 
   /**

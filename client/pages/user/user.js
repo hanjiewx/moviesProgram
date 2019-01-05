@@ -45,9 +45,8 @@ Page({
   getReleaseList() {
     qcloud.request({
       url: config.service.releaseList,
-      // login: true,
       success: result => {
-        console.log('1234567890',result)
+        console.log('123',result)
         let data = result.data
         if (!data.code) {
           this.setData({

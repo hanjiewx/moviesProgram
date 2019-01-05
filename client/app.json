@@ -7,7 +7,9 @@
     "pages/commentDetail/commentDetail",
     "pages/commentList/commentList",
     "pages/editComment/editComment",
-    "pages/previewComment/previewComment"
+    "pages/previewComment/previewComment",
+    "pages/myRelease/myRelease"
+    
   ],
  
   "window":{
