@@ -49,3 +49,12 @@ margin-left: 30rpx;
 .comment{
 margin-left: 53rpx;
 }
+.btn-back{
+ position: absolute;
+ text-align: center;
+ margin-top: 1080rpx;
+ width:750rpx;
+ height:76rpx;
+ padding-top: 25rpx;
+ background-color: rgb(25, 235, 88)
+}

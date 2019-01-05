@@ -1,13 +1,16 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config.js')
+const _ = require('../../utils/util')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userName:"徐燕",
-    userHead:'../../images/p2517753454.jpg',
+    userName:'',
+    userHead:'',
+    comment:'',
+    commentList: '',
     movieImage:'',
     id:'',
     title:'',
@@ -21,6 +24,7 @@ Page({
     qcloud.request({
       url: config.service.movieList,
       success: result => {
+        console.log(result)
         wx.hideLoading()
         let data = result.data
         if (!data.code) {
@@ -35,6 +39,7 @@ Page({
             title: '电影数据加载错误',
           })
         }
+      this.getCommentList(data.data[0].id)
       },
 
       fail: () => {
@@ -46,20 +51,53 @@ Page({
         })
       }
     })
+    
   },
+
+  getCommentList(id) {
+    qcloud.request({
+      url: config.service.commentList,
+      data: {
+        movie_id: id
+      },
+      success: result => {
+        let data = result.data
+        let commentList = data.data.map(item => {
+          let itemDate = new Date(item.create_time)
+          item.createTime = _.formatTime(itemDate)
+          return item
+        })
+        if (!data.code) {
+          this.setData({
+            commentList:commentList,
+            userName: commentList[0].username,
+            userHead: commentList[0].avatar,
+            comment: commentList[0].content,
+
+          })
+        }
+        console.log(this.data.commentList)
+      },
+      fail: error => {
+        console.error(error)
+      }
+    })
+  },
+
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
    this.getMovie()
+    console.log(this.data.userName, this.data.userHead)
   },
     /**
        * 生命周期函数--监听页面初次渲染完成
           */
   onTapCommentDetail(){
   wx.navigateTo({
-    url: '../commentDetail/commentDetail?id='+this.data.id+'&userName='+this.data.userName+'&userHead='+this.data.userHead,
+    url: '../commentDetail/commentDetail?id=' + this.data.id + '&comment='+this.data.comment+'&userName='+this.data.userName+'&userHead='+this.data.userHead,
   })
   },
   /**

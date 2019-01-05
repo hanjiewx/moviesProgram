@@ -57,14 +57,16 @@ Page({
     let id = this.data.id
     let title = this.data.movie.title
     let image = this.data.movie.image
+
     wx.showActionSheet({
       itemList: ['文字', '音频'],
       success(res) {
-        if (res.tapIndex == 0) {
+        if (res.tapIndex == 0 || 1) {
           wx.navigateTo({
-            url: '../editComment/editComment?id=' + id + '&title=' + title + '&image=' + image,
+            url: '../editComment/editComment?id=' + id + '&title=' + title + '&image=' + image + '&tapIndex=' + res.tapIndex,
           })
         }
+
       },
       fail(res) {
         console.log(res.errMsg)

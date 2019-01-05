@@ -3,6 +3,7 @@ const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
 const _ = require('../../utils/util')
 const app = getApp()
+const innerAudioContext = wx.createInnerAudioContext()
 
 Page({
 
@@ -41,13 +42,12 @@ Page({
     })
   },
 
-  getReleaseList(user) {
+  getReleaseList() {
     qcloud.request({
       url: config.service.releaseList,
-      data: {
-        user: user
-      },
+      // login: true,
       success: result => {
+        console.log('1234567890',result)
         let data = result.data
         if (!data.code) {
           this.setData({
@@ -58,9 +58,10 @@ Page({
             })
           })
         }
-        console.log(result)
-        console.log(this.data.releaseList)
       },
+      fail:error=>{
+        console.error(error)
+      }
     })
   },
 
@@ -68,6 +69,7 @@ Page({
     qcloud.request({
       url: config.service.favoriteList,
       success: result => {
+      
         let data = result.data
         if (!data.code) {
           this.setData({
@@ -78,7 +80,7 @@ Page({
             })
           })
         }
-        console.log(result)
+  
         console.log(this.data.favoriteList)
       },
       fail:error=>{
@@ -87,13 +89,30 @@ Page({
     })
   },
 
+//获取我的发布
   ontapMyRelease(){
-    console.log(this.data.userInfo.openId)
-    this.getReleaseList(this.data.userInfo.openId)
+    this.getReleaseList()
+    console.log(this.data.releaseList)
   },
+
+
+//获取我的收藏
   ontapMyFavorite() {
     this.getFavoriteList()
   },
+
+
+  // onTapPlay(){
+  //   if (e==release){
+  //   innerAudioContext.src = this.data.releaseList.record}
+  //   if (e ==favorite){
+  //     innerAudioContext.src = this.data.releaseList.record
+  //   } 
+  //   innerAudioContext.play()
+  
+  // },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -38,11 +38,11 @@ router.get('/movies/:id', controllers.movies.detail)
 // 添加评论
 router.put('/comment', validationMiddleware, controllers.comment.add)
 // 添加收藏
-router.post('/comment', validationMiddleware, controllers.comment.favorite)
+router.post('/favorite', validationMiddleware, controllers.favorite.favorite)
 // 获取影评列表
 router.get('/comment', controllers.comment.list)
 // 获取发布列表
-router.get('/comment', controllers.comment.releaseList)
+router.get('/release', controllers.release.releaseList)
 // 获取收藏列表
-router.get('/comment', controllers.comment.favoriteList)
+router.get('/favorite', controllers.favorite.favoriteList)
 module.exports = router

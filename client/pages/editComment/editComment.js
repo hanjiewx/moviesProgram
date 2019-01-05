@@ -8,7 +8,7 @@ const options = {
   sampleRate: 44100,
   numberOfChannels: 1,
   encodeBitRate: 192000,
-  format: 'aac',
+  format: 'mp3',
   frameSize: 50
 }
 
@@ -87,9 +87,12 @@ Page({
   endRecode(){
     recorderManager.stop();
     recorderManager.onStop((res) => {
+      this.data.recordValue = res.tempFilePath
+      // app.globalData.tempFilePath = res.tempFilePath
+      // console.log('globalData:', app.globalData)
+      this.data.duration = res.duration
       this.setData({
-        recordValue: res.tempFilePath,
-        duration:res.duration
+        // duration:res.duration
       }) ;
       console.log('停止录音', res)
     })

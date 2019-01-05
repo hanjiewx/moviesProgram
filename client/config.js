@@ -37,9 +37,9 @@ var config = {
       // 拉取影评列表
       commentList: `${host}/weapp/comment`,
       // 拉取收藏列表
-      favoriteList: `${host}/weapp/comment`,
+      favoriteList: `${host}/weapp/favorite`,
       // 拉取发布列表
-      releaseList: `${host}/weapp/comment`,
+      releaseList: `${host}/weapp/release`,
     }
 };
 

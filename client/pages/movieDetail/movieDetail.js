@@ -52,6 +52,13 @@ Page({
     })
   },
 
+
+ checkComment(){
+   wx.navigateTo({
+      url: '../commentList/commentList?id='+this.data.id,
+    })
+ },
+
   addComment(){
     let id=this.data.id
     let title=this.data.movie.title
@@ -73,12 +80,7 @@ Page({
     })
  
   },
-  onTapCancle(){
-    this.setData({
-      cancle: true,
-      onTap: false
-    })
-  },
+  
   /**
    * 生命周期函数--监听页面加载
    */

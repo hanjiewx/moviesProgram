@@ -17,3 +17,14 @@ app.use(router.routes())
 
 // 启动程序，监听端口
 app.listen(config.port, () => debug(`listening on port ${config.port}`))
+
+// Page({
+
+//   /**
+//    * 页面的初始数据
+//    */
+//   globalData: {
+//     tempFilePath: ''
+
+//   }
+// })

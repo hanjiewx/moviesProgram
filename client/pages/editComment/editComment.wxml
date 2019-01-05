@@ -6,23 +6,22 @@
       <view class="unlogin-tips">点击微信登录后可编辑影评</view>
     </view>
   </view>
-   <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
-   <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
+  <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
+  <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
 </view>
 
 
 <view class='all-wrapper' wx:else>
-<view class='textAndBtn-wrapper'>
-<view class="text-wrapper">
-<view class='title'>{{title}}</view>
-<view class='comment-wrapper'>
-<textarea class='comment-ipt' value='{{commentValue}}' placeholder-class='comment-placeholder' placeholder='输入你的影评内容' bindinput='onInput' wx:if="{{tapIndex==0}}"></textarea>
-<button type="primary" bindtouchstart="startRecode" bindtouchend="endRecode" class="cxbtn" wx:if="{{tapIndex==1}}">按住录音</button>
-</view>
+  <view class='textAndBtn-wrapper'>
+    <view class="text-wrapper">
+      <view class='title'>{{title}}</view>
+      <view class='comment-wrapper'>
+        <textarea class='comment-ipt' value='{{commentValue}}' placeholder-class='comment-placeholder' placeholder='输入你的影评内容' bindinput='onInput' wx:if="{{tapIndex==0}}"></textarea>
+        <button type="primary" bindtouchstart="startRecode" bindtouchend="endRecode" class="cxbtn" wx:if="{{tapIndex==1}}">按住录音</button>
+      </view>
 
+    </view>
+  </view>
+  <image class='movie-image' src="{{image}}"></image>
+  <view class="btn-finish{{!(commentValue||recordValue)?'dis':''}}" bindtap="previewComment">完成</view>
 </view>
-</view>
-<image class='movie-image' src="{{image}}"></image>
-<view class="btn-finish{{!(commentValue||recordValue)?'dis':''}}" bindtap="previewComment">完成</view>
-</view>
-
