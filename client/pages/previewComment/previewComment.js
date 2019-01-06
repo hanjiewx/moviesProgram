@@ -143,12 +143,12 @@ Page({
         url: config.service.uploadUrl,
         filePath: recordValue,
         name: 'file',
-        header: {
-          'content-type': 'multipart/form-data'
-        },
-        formData: {
-          user: 'test'
-        },
+        // header: {
+        //   'content-type': 'multipart/form-data'
+        // },
+        // formData: {
+        //   user: 'test'
+        // },
         success: res => {
           let data = JSON.parse(res.data)
           console.log(res)

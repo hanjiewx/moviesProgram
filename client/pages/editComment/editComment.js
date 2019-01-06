@@ -18,24 +18,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-  tapIndex:'',
-  userInfo: null,
-  locationAuthType: app.data.locationAuthType,
-  commentValue:'',
-  recordValue: '',
-  title:'',
-  image:'',
-  id:'',
-  scope:'',
-  duration:''
+    tapIndex: '',
+    userInfo: null,
+    locationAuthType: app.data.locationAuthType,
+    commentValue: '',
+    recordValue: '',
+    title: '',
+    image: '',
+    id: '',
+    scope: '',
+    duration: ''
   },
 
-  previewComment(){
-    if (this.data.commentValue || this.data.recordValue){
-    wx.navigateTo({
-      url: "../previewComment/previewComment?commentValue=" + this.data.commentValue +'&recordValue='+this.data.recordValue +"&duration="+this.data.duration+ "&title=" + this.data.title + "&image=" + this.data.image + "&id=" + this.data.id
-     })
-    }  
+  previewComment() {
+    if (this.data.commentValue || this.data.recordValue) {
+      wx.navigateTo({
+        url: "../previewComment/previewComment?commentValue=" + this.data.commentValue + '&recordValue=' + this.data.recordValue + "&duration=" + this.data.duration + "&title=" + this.data.title + "&image=" + this.data.image + "&id=" + this.data.id
+      })
+    }
   },
 
   onTapLogin: function () {
@@ -59,12 +59,12 @@ Page({
       commentValue: event.detail.value.trim()
     })
   },
-  
-  startRecode(){
+
+  startRecode() {
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.record']) {
-          console.log({'scope':res.authSetting['scope.record']})
+          console.log({ 'scope': res.authSetting['scope.record'] })
         } else {
           wx.authorize({
             scope: 'scope.record',
@@ -74,17 +74,17 @@ Page({
           })
         }
       },
-      fail(error){
-     console.log(error)
+      fail(error) {
+        console.log(error)
       }
     })
 
-   recorderManager.start(options);
-   recorderManager.onStart(() => {
-        console.log('recorder start')
-      });
+    recorderManager.start(options);
+    recorderManager.onStart(() => {
+      console.log('recorder start')
+    });
   },
-  endRecode(){
+  endRecode() {
     recorderManager.stop();
     recorderManager.onStop((res) => {
       this.data.recordValue = res.tempFilePath
@@ -93,7 +93,7 @@ Page({
       this.data.duration = res.duration
       this.setData({
         // duration:res.duration
-      }) ;
+      });
       console.log('停止录音', res)
     })
   },
@@ -101,23 +101,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  if (options.commentValue){
-    this.setData({
-      commentValue: options.commentValue,
-      title: options.title,
-      image: options.image,
-      id: options.id,
-      tapIndex: options.tapIndex
-    })
-  }
- else{
-    this.setData({
-      title: options.title,
-      image: options.image,
-      id: options.id,
-      tapIndex: options.tapIndex
-    })
-  }
+    if (options.commentValue) {
+      this.setData({
+        commentValue: options.commentValue,
+        title: options.title,
+        image: options.image,
+        id: options.id,
+        tapIndex: options.tapIndex
+      })
+    }
+    else {
+      this.setData({
+        title: options.title,
+        image: options.image,
+        id: options.id,
+        tapIndex: options.tapIndex
+      })
+    }
     console.log(options.tapIndex)
   },
 
@@ -142,7 +142,7 @@ Page({
         })
       }
     })
- 
+
   },
 
   /**

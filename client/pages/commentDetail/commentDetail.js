@@ -11,12 +11,12 @@ Page({
   data: {
     movie: '',
     id: '',
-    userInfo:'',
-    userName:'',
-    userHead:'',
-    comment:'',
-    commentList:'',
-   
+    userInfo: '',
+    userName: '',
+    userHead: '',
+    comment: '',
+    commentList: '',
+
   },
 
   getMovieDetail(id) {
@@ -90,46 +90,46 @@ Page({
     }
   },
 
-  addFavorite(){
-      wx.showLoading({
-        title: '正在收藏评论'
-      })
+  addFavorite() {
+    wx.showLoading({
+      title: '正在收藏评论'
+    })
 
-      qcloud.request({
-        url: config.service.addFavorite,
-        login: true,
-        method: 'POST',
-        data: {
-          content: this.data.comment,
-          movie_id: this.data.id
-        },
-        success: result => {
-          wx.hideLoading()
+    qcloud.request({
+      url: config.service.addFavorite,
+      login: true,
+      method: 'POST',
+      data: {
+        content: this.data.comment,
+        movie_id: this.data.id
+      },
+      success: result => {
+        wx.hideLoading()
 
-          let data = result.data
-          if (!data.code) {
-            wx.showToast({
-              title: '发表收藏成功'
-            })
+        let data = result.data
+        if (!data.code) {
+          wx.showToast({
+            title: '发表收藏成功'
+          })
 
-          } else {
-            wx.showToast({
-              icon: 'none',
-              title: '发表收藏失败'
-            })
-          }
-        },
-        fail: () => {
-          wx.hideLoading()
-
+        } else {
           wx.showToast({
             icon: 'none',
             title: '发表收藏失败'
           })
         }
-      })
-    },
-  
+      },
+      fail: () => {
+        wx.hideLoading()
+
+        wx.showToast({
+          icon: 'none',
+          title: '发表收藏失败'
+        })
+      }
+    })
+  },
+
   getCommentList(id) {
     qcloud.request({
       url: config.service.commentList,
@@ -162,9 +162,9 @@ Page({
   onLoad: function (options) {
     this.setData({
       id: options.id,
-      userName:options.userName,
-      userHead:options.userHead,
-      comment:options.comment
+      userName: options.userName,
+      userHead: options.userHead,
+      comment: options.comment
     })
     this.getMovieDetail(this.data.id)
     this.getCommentList(this.data.id)

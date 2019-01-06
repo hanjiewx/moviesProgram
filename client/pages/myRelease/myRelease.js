@@ -10,8 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  releaseList:'',
-  id:''
+    releaseList: '',
+    id: ''
   },
 
   getMyReleaseList(id) {
