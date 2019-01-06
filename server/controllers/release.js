@@ -6,8 +6,9 @@ module.exports = {
    */
 releaseList: async ctx => {
   //ctx.state.data = await DB.query('SELECT * FROM movieComment')
-let user = ctx.state.$wxInfo.userinfo.openId
-  ctx.state.data = await DB.query('SELECT * FROM movieComment where movieComment.user = ?', [user])
+// let user = ctx.state.$wxInfo.userinfo.openId
+  ctx.state.data = await DB.query('SELECT * FROM movieComment')
 },
  
 }
+// where movieComment.user = ? ', [user]
