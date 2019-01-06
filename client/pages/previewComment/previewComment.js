@@ -38,7 +38,7 @@ Page({
   },
 
   onTapPlay() {
-    innerAudioContext.src = this.data.recordValue + '=' + this.data.duration + '.mp3'
+    innerAudioContext.src = this.data.recordValue + '=' + this.data.duration + '.aac'
     // innerAudioContext.src = app.globalData.tempFilePath
     innerAudioContext.play()
     this.setData({
@@ -143,9 +143,12 @@ Page({
         url: config.service.uploadUrl,
         filePath: recordValue,
         name: 'file',
-        // header: {
-        //   'content-type': 'multipart/form-data'
-        // },
+        header: {
+          'content-type': 'multipart/form-data'
+        },
+        formData: {
+          user: 'test'
+        },
         success: res => {
           let data = JSON.parse(res.data)
           console.log(res)

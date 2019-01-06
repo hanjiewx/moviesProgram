@@ -19,7 +19,7 @@
 </view>
 
 <view class='comment-card' wx:for="{{releaseList}}" wx:key="{{id}}" wx:if="{{releaseList.length>1}}">
-<navigator url='../commentDetail/commentDetail?id={{id}}&userHead={{item.avatar}}&userName={{item.username}}&comment={{item.content}}'>
+<navigator url='../commentDetail/commentDetail?id={{item.movie_id}}&userHead={{item.avatar}}&userName={{item.username}}&comment={{item.content}}'>
 <view class='userInfo'>
 <image class="user-head" src='{{item.avatar}}'></image>
 <view class="user-name" >{{item.username}}</view>

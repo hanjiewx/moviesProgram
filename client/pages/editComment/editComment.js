@@ -8,7 +8,7 @@ const options = {
   sampleRate: 44100,
   numberOfChannels: 1,
   encodeBitRate: 192000,
-  format: 'mp3',
+  format: 'aac',
   frameSize: 50
 }
 
