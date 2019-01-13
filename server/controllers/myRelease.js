@@ -1,15 +1,11 @@
-const DB = require('../utils/db')
-
-module.exports = {
-  /**
-     * 获取发布列表
-     */
-  myReleaseList: async ctx => {
-    let movieId = +ctx.request.query.movie_id
-    ctx.state.data = await DB.query('SELECT * FROM movieComment')
-    // let user = ctx.state.$wxInfo.userinfo.openId
-    // let movieId = +ctx.request.query.movie_id
-    // ctx.state.data = await DB.query('SELECT * FROM movieComment where movieComment.user = ? AND movieComment.movie_id = ?', [user, movieId])
-  },
-
-}
+//  const DB = require('../utils/db')
+// /**
+// * 获取某电影下我的评论列表
+// */
+// module.exports = {
+// myReleaseList: async ctx => {
+//   let movieId = +ctx.request.query.movie_id
+//   let user = ctx.state.$wxInfo.userinfo.openId
+//     ctx.state.data = await DB.query('select * from movieComment where movieComment.user=? AND movieComment.movie_id =?', [user, movieId])
+// }
+// }

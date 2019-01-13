@@ -4,7 +4,12 @@
 	"miniprogramRoot": "client/",
 	"qcloudRoot": "server/",
 	"setting": {
-		"newFeature": true
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
 	},
 	"appid": "wx041b4cd30ca8e607",
 	"projectname": "moviesProgram",
@@ -25,49 +30,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": -1,
 			"list": [
-				{
-					"id": -1,
-					"name": "热门电影",
-					"pathName": "pages/hotMovies/hotMovies",
-					"query": ""
-				},
-				{
-					"id": 1,
-					"name": "电影详情",
-					"pathName": "pages/movieDetail/movieDetail",
-					"query": "id=1"
-				},
 				{
 					"id": -1,
 					"name": "我的",
 					"pathName": "pages/user/user",
 					"query": ""
-				},
-				{
-					"id": 4,
-					"name": "影评编辑",
-					"pathName": "pages/editComment/editComment",
-					"query": ""
-				},
-				{
-					"id": 5,
-					"name": "影评预览",
-					"pathName": "pages/previewComment/previewComment",
-					"query": "commentValue=123456ddf"
-				},
-				{
-					"id": -1,
-					"name": "影评详情",
-					"pathName": "pages/commentDetail/commentDetail",
-					"query": "id=1"
-				},
-				{
-					"id": 6,
-					"name": "影评列表",
-					"pathName": "pages/commentList/commentList",
-					"query": "id=1"
 				}
 			]
 		}

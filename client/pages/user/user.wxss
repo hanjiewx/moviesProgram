@@ -1,9 +1,12 @@
 .all-wrapper{
   width:1050rpx;
-  display:flex;
+  
   padding-top: 20rpx;
   padding-bottom: 20rpx;
-  background-color:rgb(243, 241, 241);
+
+}
+.title-wrapper{
+display:flex;
 }
 .myRelease{
   display:flex;
@@ -31,8 +34,15 @@ border-bottom:2px solid rgb(230, 223, 223);
 .comment-card:last-child{
   border-bottom: none;
 }
+.wrapper-titleAndComment{
+margin-top: 50rpx;
+height:250rpx;
+border-bottom:2px solid rgb(230, 223, 223);
+}
+
+
 .userInfo{
- margin-top: 70rpx;
+ margin-top: 30rpx;
  display:flex;
 }
 .user-head{

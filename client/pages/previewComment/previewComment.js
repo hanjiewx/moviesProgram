@@ -38,8 +38,7 @@ Page({
   },
 
   onTapPlay() {
-    innerAudioContext.src = this.data.recordValue + '=' + this.data.duration + '.aac'
-    // innerAudioContext.src = app.globalData.tempFilePath
+  innerAudioContext.src = this.data.recordValue + '=' + this.data.duration + '.mp3'
     innerAudioContext.play()
     this.setData({
       record: innerAudioContext.src
@@ -92,10 +91,9 @@ Page({
         qcloud.request({
           url: config.service.addComment,
           login: true,
-          method: 'POST',
+          method: 'PUT',
           data: {
             record,
-            content,
             movie_id: this.data.id
           },
           success: result => {
@@ -108,9 +106,7 @@ Page({
                 title: '发表评论成功'
               })
 
-              setTimeout(() => {
-                wx.navigateBack()
-              }, 1500)
+              
             } else {
               wx.showToast({
                 icon: 'none',
@@ -143,19 +139,14 @@ Page({
         url: config.service.uploadUrl,
         filePath: recordValue,
         name: 'file',
-        // header: {
-        //   'content-type': 'multipart/form-data'
-        // },
-        // formData: {
-        //   user: 'test'
-        // },
+     
         success: res => {
           let data = JSON.parse(res.data)
           console.log(res)
-          // if (!data.code) {
-          // record.push(data.data.record)
-          //   cb && cb(record)
-          // }
+          if (!data.code) {
+          record.push(data.data.imgUrl)
+            cb && cb(record)
+          }
 
         },
         fail: (e) => {

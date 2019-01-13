@@ -8,7 +8,7 @@ const CONF = {
   // 微信小程序 App Secret
   appSecret: 'fc99252a026be93161e5b299fb1c34a7',
   qcloudAppId: '1258339089',
-  qcloudSecretId: 'AKIDZzZ9eMUFfzFQVRLBjZdbrdSOI75x3cjI ',
+  qcloudSecretId: 'AKIDZzZ9eMUFfzFQVRLBjZdbrdSOI75x3cjI',
   qcloudSecretKey: 'hw5zyzv7OYmZmVOmBYz2OqfJsERhMvS8',
 
   // 是否使用腾讯云代理登录小程序
@@ -35,11 +35,11 @@ const CONF = {
      */
     region: 'ap-shanghai',
     // Bucket 名称
-    fileBucket: 'product-1258339089',
+    fileBucket: 'product',
     // 文件夹
-    uploadFolder: 'audios',
+    uploadFolder: '',
     //上传文件类型
-    mimetypes: ['audio/aac', 'audio/x-aac', 'audio/mpeg', 'audio/mp3', 'audio/m4a', 'image/jpg', 'image/jepg', 'image/png']
+    mimetypes: ['audio/aac', 'audio/x-aac', 'audio/mpeg', 'audio/mp3', 'audio/m4a', 'image/jpg', 'image/jepg', 'image/png', 'video/webm']
   },
 
   // 微信登录态有效期

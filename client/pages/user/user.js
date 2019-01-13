@@ -16,7 +16,8 @@ Page({
     locationAuthType: app.data.locationAuthType,
     releaseList: '',
     favoriteList:'',
-    id: ''
+    id: '',
+    ontap:''
   },
 
   
@@ -42,11 +43,11 @@ Page({
     })
   },
 
-  getReleaseList() {
+  getReleaseList(user) {
     qcloud.request({
       url: config.service.releaseList,
       success: result => {
-        console.log('123',result)
+        console.log('123', result)
         let data = result.data
         if (!data.code) {
           this.setData({
@@ -58,7 +59,7 @@ Page({
           })
         }
       },
-      fail:error=>{
+      fail: error => {
         console.error(error)
       }
     })
@@ -89,15 +90,23 @@ Page({
   },
 
 //获取我的发布
-  ontapMyRelease(){
-    this.getReleaseList()
-    console.log(this.data.releaseList)
+  ontapMyRelease(e){
+    let user = this.data.userInfo.openId
+    this.getReleaseList(user)
+    console.log(this.data.userInfo)
+    this.setData({
+      ontap:e.currentTarget.id
+    })
   },
 
 
 //获取我的收藏
-  ontapMyFavorite() {
+  ontapMyFavorite(e) {
     this.getFavoriteList()
+    this.setData({
+      ontap: e.currentTarget.id
+    })
+    console.log(this.data.ontap)
   },
 
 

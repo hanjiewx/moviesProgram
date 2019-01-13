@@ -6,53 +6,47 @@
       <view class="unlogin-tips">点击微信登录后可查看已收藏和已发布</view>
     </view>
   </view>
-   <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
-   <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
+  <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
+  <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
 </view>
 
 <view class="all-wrapper" wx:else>
-  <view class="myRelease" bindtap='ontapMyRelease'>我的发布</view>
-  <view class='myFavorite'bindtap='ontapMyFavorite'>我的收藏</view>
-  <view class="user-card">
-    <view class='releaseList' wx:if="{{Release}}" wx:for="{{releaseList}}" wx:key="{{movie_id}}">
-    <navigator class='comment-card' url='../commentDetail/commentDetail?id={{item.movie_id}}'>
-      <image class='movie-image' src='{{item.image}}' mode='widthFix'></image>
+<view class='title-wrapper'>
+  <view class="myRelease" bindtap='ontapMyRelease' id='release'>我的发布</view>
+  <view class='myFavorite' bindtap='ontapMyFavorite' id='favorite'>我的收藏</view>
+  </view>
+  <view class="user-card2" wx:if="{{ontap=='release'}}">
+    <view class='releaseList' wx:for="{{releaseList}}" wx:key="{{index}}">
+      <navigator class='comment-card' url='../commentDetail/commentDetail?id={{item.movie_id}}'>
        <view class="wrapper-titleAndComment">
-              <view class='title'>{{item.title}}</view>
-              <view class='comment-wrapper'>
-              <view class='comment' wx:if="{{item.content}}">{{item.content}}</view>
-              <view class='comment' bindtap='onTapPlay' wx:if="{{item.record}}">点击播放</view>
-             <view class='userInfo'>
-             <image class="user-head">{{userHead}}</image>
-             <view class='user-name'>{{userName}}</view>
-             </view>
-            </view>
-      </view>
-    </navigator>
-    </view>
- </view>
-
- <view class="user-card">
-  <view class='favoriteList' wx:if="{{Favorite}}" wx:for="{{favoriteList}}" wx:key="{{movie_id}}">
-    <navigator class='comment-card' url='../commentDetail/commentDetail?id={{item.movie_id}}'>
-      <image class='movie-image' src='{{item.image}}' mode='widthFix'></image>
-       <view class="wrapper-titleAndComment">
-              <view class='title'>{{item.title}}</view>
               <view class='comment-wrapper'>
               <view class='comment' wx:if="{{item.content}}">{{item.content}}</view>
               <view class='comment' bindtap='recordPlay' wx:if="{{item.record}}">点击播放</view>
              <view class='userInfo'>
-             <image class="user-head">{{userHead}}</image>
-             <view class='user-name'>{{userName}}</view>
+             <image class="user-head" src="{{item.avatar}}"></image>
+             <view class='user-name'>{{item.username}}</view>
              </view>
             </view>
       </view>
-    </navigator>
+    </navigator> 
+    </view>
   </view>
- </view> 
 
- </view>
+  <view class="user-card2" wx:if="{{ontap=='favorite'}}">
+    <view class='favoriteList' wx:for="{{favoriteList}}" wx:key="{{index}}">
+      <navigator class='comment-card' url='../commentDetail/commentDetail?id={{item.movie_id}}'>
+       <view class="wrapper-titleAndComment">
+              <view class='comment-wrapper'>
+              <view class='comment' wx:if="{{item.content}}">{{item.content}}</view>
+              <view class='comment' bindtap='recordPlay' wx:if="{{item.record}}">点击播放</view>
+             <view class='userInfo'>
+             <image class="user-head" src="{{item.avatar}}"></image>
+             <view class='user-name'>{{item.username}}</view>
+             </view>
+            </view>
+      </view>
+    </navigator> 
+    </view>
+  </view>
 
-
-
-
+</view> 

@@ -44,7 +44,7 @@ router.get('/comment', controllers.comment.list)
 // 获取发布列表
 router.get('/release', controllers.release.releaseList)
 // 获取某电影下的发布列表
-router.get('/myRelease', controllers.myRelease.myReleaseList)
+router.get('/comment', controllers.comment.myReleaseList)
 // 获取收藏列表
 router.get('/favorite', controllers.favorite.favoriteList)
 module.exports = router

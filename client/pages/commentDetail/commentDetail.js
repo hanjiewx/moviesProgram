@@ -2,6 +2,7 @@ const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
 const _ = require('../../utils/util')
 const app = getApp()
+const innerAudioContext = wx.createInnerAudioContext()
 
 Page({
 
@@ -15,6 +16,7 @@ Page({
     userName: '',
     userHead: '',
     comment: '',
+    record:'',
     commentList: '',
 
   },
@@ -155,6 +157,18 @@ Page({
     })
   },
 
+  onTapPlay(){
+    console.log(this.data.record)
+    innerAudioContext.obeyMuteSwitch=false
+    innerAudioContext.src = this.data.record
+    innerAudioContext.play()
+    innerAudioContext.onError(e=>{
+      console.log(e)
+    })
+
+    
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -164,7 +178,8 @@ Page({
       id: options.id,
       userName: options.userName,
       userHead: options.userHead,
-      comment: options.comment
+      comment: options.comment,
+      record:options.record
     })
     this.getMovieDetail(this.data.id)
     this.getCommentList(this.data.id)

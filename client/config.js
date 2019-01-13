@@ -41,7 +41,7 @@ var config = {
     // 拉取发布列表
     releaseList: `${host}/weapp/release`,
     //拉取某电影我的发布列表
-    myReleaseList: `${host}/weapp/myRelease`,
+    myReleaseList: `${host}/weapp/comment`,
   }
 };
 

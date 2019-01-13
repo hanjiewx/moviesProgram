@@ -10,6 +10,7 @@ Page({
     userName:'',
     userHead:'',
     comment:'',
+    record:'',
     commentList: '',
     movieImage:'',
     id:'',
@@ -73,7 +74,7 @@ Page({
             userName: commentList[0].username,
             userHead: commentList[0].avatar,
             comment: commentList[0].content,
-
+            record: commentList[0].record,
           })
         }
         console.log(this.data.commentList)
@@ -97,7 +98,7 @@ Page({
           */
   onTapCommentDetail(){
   wx.navigateTo({
-    url: '../commentDetail/commentDetail?id=' + this.data.id + '&comment='+this.data.comment+'&userName='+this.data.userName+'&userHead='+this.data.userHead,
+    url: '../commentDetail/commentDetail?id=' + this.data.id + '&comment=' + this.data.comment + '&record=' + this.data.record +'&userName='+this.data.userName+'&userHead='+this.data.userHead,
   })
   },
   /**
