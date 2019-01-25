@@ -3,9 +3,10 @@
 
 CREATE TABLE `movieComment` (
   `user` varchar(255) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `avatar` varchar(255) NOT NULL,
   `content` varchar(511) CHARACTER SET utf8 DEFAULT NULL,
+  `record` varchar(511) CHARACTER SET utf8 DEFAULT NULL,
   `images` varchar(1023) DEFAULT NULL,
   `movie_id` int(11) NOT NULL,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -13,9 +14,10 @@ CREATE TABLE `movieComment` (
 
 CREATE TABLE `favoriteComment` (
   `user` varchar(255) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `avatar` varchar(255) NOT NULL,
   `content` varchar(511) CHARACTER SET utf8 DEFAULT NULL,
+  `record` varchar(511) CHARACTER SET utf8 DEFAULT NULL,
   `images` varchar(1023) DEFAULT NULL,
   `movie_id` int(11) NOT NULL,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

@@ -1,5 +1,16 @@
+<view wx:if="{{!userInfo}}">
+  <view class="unlogin-card">
+    <view class="unlogin-head"></view>
+    <view class="unlogin-info">
+      <view class="unlogin-text">未登录</view>
+      <view class="unlogin-tips">点击微信登录后可编辑影评</view>
+    </view>
+  </view>
+  <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
+  <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
+</view>
 
-<view class='all-wrapper' >
+<view class='all-wrapper' wx:else>
 <view class='textAndBtn-wrapper'>
 <view class="text-wrapper">
 <view class='title'>{{movie.title}}</view>

@@ -15,9 +15,12 @@ Page({
     movieImage:'',
     id:'',
     title:'',
-
   },
-  getMovie(){
+  onPullDownRefresh() {
+    this.getMovie(() => { wx.stopPullDownRefresh() })
+  },
+
+  getMovie(callback){
     wx.showLoading({
       title: '电影数据加载中...',
     })
@@ -50,6 +53,9 @@ Page({
           icon: 'none',
           title: '电影数据加载错误',
         })
+      },
+      complete:()=>{
+        callback && callback()
       }
     })
     
@@ -71,18 +77,36 @@ Page({
         if (!data.code) {
           this.setData({
             commentList:commentList,
-            userName: commentList[0].username,
-            userHead: commentList[0].avatar,
-            comment: commentList[0].content,
-            record: commentList[0].record,
           })
         }
         console.log(this.data.commentList)
       },
       fail: error => {
         console.error(error)
+      },
+    })
+  },
+
+  addComment() {
+    let id = this.data.id
+    let title = this.data.title
+    let image = this.data.movieImage
+
+    wx.showActionSheet({
+      itemList: ['文字', '音频'],
+      success(res) {
+        if (res.tapIndex == 0 || 1) {
+          wx.navigateTo({
+            url: '../editComment/editComment?id=' + id + '&title=' + title + '&image=' + image + '&tapIndex=' + res.tapIndex,
+          })
+        }
+
+      },
+      fail(res) {
+        console.log(res.errMsg)
       }
     })
+
   },
 
   
@@ -98,55 +122,7 @@ Page({
           */
   onTapCommentDetail(){
   wx.navigateTo({
-    url: '../commentDetail/commentDetail?id=' + this.data.id + '&comment=' + this.data.comment + '&record=' + this.data.record +'&userName='+this.data.userName+'&userHead='+this.data.userHead,
+    url: '../commentDetail/commentDetail?id=' + this.data.id + '&commentList=' + this.data.commentList,
   })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

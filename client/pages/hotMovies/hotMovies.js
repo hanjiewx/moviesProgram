@@ -16,8 +16,11 @@ Page({
   onLoad: function (options) {
     this.getMovieList()
   },
+  onPullDownRefresh() {
+    this.getMovie(() => { wx.stopPullDownRefresh() })
+  },
 
-  getMovieList() {
+  getMovieList(callback) {
     wx.showLoading({
       title: '电影数据加载中...',
     })
@@ -46,6 +49,9 @@ Page({
           icon: 'none',
           title: '电影数据加载错误',
         })
+      },
+      complete: () => {
+        callback && callback()
       }
     })
   },

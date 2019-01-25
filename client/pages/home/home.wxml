@@ -1,16 +1,21 @@
 <view class="wrapper-all">
-<view class="wrapper-picture">
-<navigator url='../movieDetail/movieDetail?id={{id}}'>
-<image  class="picture" src="{{movieImage}}"></image>
-</navigator>
-<view class="text">{{title}}</view>
-<view class='userComment' bindtap='onTapCommentDetail'>
-<image class='user-head' src='{{userHead}}'></image>
-<view class="comment">{{userName}}给你推荐了一条影评</view>
-</view>
-</view>
-<view class='tabBar'>
-<navigator class="hot" url="../hotMovies/hotMovies"><view>热门</view></navigator>
-<navigator class='user' url="../user/user"><view>我的</view></navigator>
-</view>
+  <view class="wrapper-picture">
+    <navigator url='../movieDetail/movieDetail?id={{id}}'>
+      <image class="picture" src="{{movieImage}}"></image>
+    </navigator>
+    <view class="text">{{title}}</view>
+    <view class='userComment' bindtap='onTapCommentDetail' wx:if="{{commentList!=''}}">
+      <image class='user-head' src='{{commentList[0].avatar}}'></image>
+      <view class="comment">{{commentList[0].username}}给你推荐了一条影评</view>
+    </view>
+    <view class='pleaseadd' bindtap='addComment' wx:else>请添加影评</view>
+  </view>
+  <view class='tabBar'>
+    <navigator class="hot" url="../hotMovies/hotMovies">
+      <view>热门</view>
+    </navigator>
+    <navigator class='user' url="../user/user">
+      <view>我的</view>
+    </navigator>
+  </view>
 </view>

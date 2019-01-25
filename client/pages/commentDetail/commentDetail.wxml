@@ -5,11 +5,11 @@
 <view class='title'>{{movie.title}}</view>
 <view class="comment-wrapper">
 <view class='userInfo'>
-<image class='user-head' src='{{userHead}}'></image>
-<view class='user-name'>{{userName}}的影评</view>
+<image class='user-head' src='{{userhead}}'></image>
+<view class='user-name'>{{username}}的影评</view>
 </view>
-<view class='comment' wx:if="{{comment!='null'}}">{{comment}}</view>
-<view class='record' bindtap='onTapPlay' wx:if="{{record!='null'}}">点击播放</view>
+<view class='comment' wx:if="{{comment!=('null'||'')}}">{{comment}}</view>
+<view class='record' bindtap='onTapPlay' wx:else>点击播放</view>
 </view>
 </view>
 <view class='btn-wrapper'>

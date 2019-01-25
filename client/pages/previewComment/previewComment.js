@@ -16,7 +16,8 @@ Page({
     title: '',
     image: '',
     id: '',
-    record: ''
+    record: '',
+    commentList: ''
   },
 
   onTapLogin: function() {
@@ -40,6 +41,7 @@ Page({
   onTapPlay() {
   innerAudioContext.src = this.data.recordValue + '=' + this.data.duration + '.mp3'
     innerAudioContext.play()
+    
     this.setData({
       record: innerAudioContext.src
     })
@@ -47,6 +49,14 @@ Page({
   },
 
   addComment(event) {
+    for (let i = 0; i < this.data.commentList.length; i++) {
+      if (this.data.commentList[i].user == this.data.userInfo.openId) {
+        console.log('j>0')
+        wx.navigateTo({
+          url: '../commentDetail/commentDetail?id=' + this.data.id
+        })
+      }
+      else {
     wx.showLoading({
       title: '正在发表评论'
     })
@@ -128,7 +138,9 @@ Page({
     wx.navigateTo({
       url: '../commentList/commentList?id='+this.data.id,
     })
-  },
+  }
+}
+},
 
   uploadRecord(cb) {
     let recordValue = this.data.record
@@ -157,6 +169,33 @@ Page({
       cb && cb(record)
     }
   },
+  getCommentList(id, callback) {
+    qcloud.request({
+      url: config.service.commentList,
+      data: {
+        movie_id: id
+      },
+      success: result => {
+        let data = result.data
+        if (!data.code) {
+          this.setData({
+            commentList: data.data.map(item => {
+              let itemDate = new Date(item.create_time)
+              item.createTime = _.formatTime(itemDate)
+              return item
+            })
+          })
+        }
+        console.log(this.data.commentList)
+      },
+      fail: error => {
+        console.error(error)
+      },
+      complete: () => {
+        callback && callback()
+      }
+    })
+  },
 
 
   /**
@@ -180,6 +219,7 @@ Page({
         id: options.id
       })
     }
+    this.getCommentList(options.id)
   },
 
   /**

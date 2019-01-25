@@ -53,3 +53,7 @@ padding-top: 30rpx;
 margin-left: 290rpx;
 padding-bottom: 20rpx;
 }
+.pleaseadd{
+  text-align: center;
+  margin-top: 30rpx;
+}

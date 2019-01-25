@@ -1,4 +1,6 @@
 // pages/editComment/editComment.js
+const qcloud = require('../../vendor/wafer2-client-sdk/index')
+const config = require('../../config.js')
 const app = getApp()
 const recorderManager = wx.getRecorderManager()
 const innerAudioContext = wx.createInnerAudioContext()
@@ -29,6 +31,53 @@ Page({
     scope: '',
     duration: ''
   },
+  onPullDownRefresh() {
+    this.getMovieDetail(this.data.id, () => { wx.stopPullDownRefresh() })
+  },
+  
+  getMovieDetail(id,callback) {
+    wx.showLoading({
+      title: '电影数据加载中...',
+    })
+
+    qcloud.request({
+      url: config.service.movieDetail + id,
+      success: result => {
+        wx.hideLoading()
+        let data = result.data
+        if (!data.code) {
+          this.setData({
+            movie: data.data,
+            title: data.data.title,
+            image: data.data.image,
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '电影数据加载错误123',
+          })
+          setTimeout(() => {
+            wx.navigateBack()
+          }, 2000)
+        }
+      },
+
+      fail: (e) => {
+        wx.hideLoading()
+        wx.showToast({
+          icon: 'none',
+          title: '电影数据加载错误456',
+        })
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 2000)
+      },
+      complete:()=>{
+        callback&&callback()
+      }
+    })
+  },
+
 
   previewComment() {
     if (this.data.commentValue || this.data.recordValue) {
@@ -118,7 +167,7 @@ Page({
         tapIndex: options.tapIndex
       })
     }
-    console.log(options.tapIndex)
+ 
   },
 
   /**

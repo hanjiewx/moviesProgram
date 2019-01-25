@@ -12,8 +12,11 @@ Page({
   commentList:'',
   id:''
   },
-
-  getCommentList(id) {
+  onPullDownRefresh() {
+    let id = this.data.id
+    this.getCommentList(id, () => { wx.stopPullDownRefresh() })
+  },
+  getCommentList(id,callback) {
     qcloud.request({
       url: config.service.commentList,
       data: {
@@ -34,6 +37,9 @@ Page({
       },
       fail:error=>{
         console.error(error)
+      },
+      complete:()=>{
+        callback&&callback()
       }
     })
   },
@@ -44,7 +50,7 @@ Page({
     this.setData({
       id:options.id
     })
-  this.getCommentList(this.data.id)
+  this.getCommentList(this.data.id,'')
   
   },
 

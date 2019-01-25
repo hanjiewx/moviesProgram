@@ -33,7 +33,7 @@ var config = {
     // 添加评论
     addComment: `${host}/weapp/comment`,
     // 添加收藏
-    addFavorite: `${host}/weapp/comment`,
+    addFavorite: `${host}/weapp/favorite`,
     // 拉取影评列表
     commentList: `${host}/weapp/comment`,
     // 拉取收藏列表
