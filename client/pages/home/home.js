@@ -40,18 +40,19 @@ Page({
         } else {
           wx.showToast({
             icon: 'none',
-            title: '电影数据加载错误',
+            title: '电影数据加载错误123',
           })
         }
       this.getCommentList(data.data[0].id)
       },
 
-      fail: () => {
+      fail: e => {
+        console.error(e)
         wx.hideLoading()
 
         wx.showToast({
           icon: 'none',
-          title: '电影数据加载错误',
+          title: '电影数据加载错误456',
         })
       },
       complete:()=>{

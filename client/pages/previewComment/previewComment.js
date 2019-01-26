@@ -49,6 +49,7 @@ Page({
   },
 
   addComment(event) {
+ 
     for (let i = 0; i < this.data.commentList.length; i++) {
       if (this.data.commentList[i].user == this.data.userInfo.openId) {
         console.log('j>0')
@@ -57,6 +58,7 @@ Page({
         })
       }
       else {
+       
     wx.showLoading({
       title: '正在发表评论'
     })
