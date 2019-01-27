@@ -1,11 +1,9 @@
 <view class='movie-row' wx:for='{{movieList}}' wx:key='id'>
   <navigator class='movie-card' url='../movieDetail/movieDetail?id={{item.id}}'>
-      <image class='movie-image' src='{{item.image}}' mode='widthFix'></image>
-      <view class="wrapper-titleAndType">
-              <view class='title'>{{item.title}}</view>
-                  <view class='type'>类型：{{item.category}}</view>
-      </view>
-       </navigator>
+    <image class='movie-image' src='{{item.image}}' mode='widthFix'></image>
+    <view class="wrapper-titleAndType">
+      <view class='title'>{{item.title}}</view>
+      <view class='type'>类型：{{item.category}}</view>
+    </view>
+  </navigator>
 </view>
-
- 

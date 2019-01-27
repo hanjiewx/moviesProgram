@@ -32,10 +32,12 @@ Page({
     duration: ''
   },
   onPullDownRefresh() {
-    this.getMovieDetail(this.data.id, () => { wx.stopPullDownRefresh() })
+    this.getMovieDetail(this.data.id, () => {
+      wx.stopPullDownRefresh()
+    })
   },
-  
-  getMovieDetail(id,callback) {
+
+  getMovieDetail(id, callback) {
     wx.showLoading({
       title: '电影数据加载中...',
     })
@@ -72,8 +74,8 @@ Page({
           wx.navigateBack()
         }, 2000)
       },
-      complete:()=>{
-        callback&&callback()
+      complete: () => {
+        callback && callback()
       }
     })
   },
@@ -87,9 +89,11 @@ Page({
     }
   },
 
-  onTapLogin: function () {
+  onTapLogin: function() {
     app.login({
-      success: ({ userInfo }) => {
+      success: ({
+        userInfo
+      }) => {
         this.setData({
           userInfo,
           locationAuthType: app.data.locationAuthType
@@ -113,7 +117,9 @@ Page({
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.record']) {
-          console.log({ 'scope': res.authSetting['scope.record'] })
+          console.log({
+            'scope': res.authSetting['scope.record']
+          })
         } else {
           wx.authorize({
             scope: 'scope.record',
@@ -149,7 +155,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     if (options.commentValue) {
       this.setData({
         commentValue: options.commentValue,
@@ -158,8 +164,7 @@ Page({
         id: options.id,
         tapIndex: options.tapIndex
       })
-    }
-    else {
+    } else {
       this.setData({
         title: options.title,
         image: options.image,
@@ -167,25 +172,21 @@ Page({
         tapIndex: options.tapIndex
       })
     }
- 
+    console.log('id', options.id)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.setData({
       locationAuthType: app.data.locationAuthType
     })
     app.checkSession({
-      success: ({ userInfo }) => {
+      success: ({
+        userInfo
+      }) => {
         this.setData({
           userInfo
         })
@@ -194,38 +195,4 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

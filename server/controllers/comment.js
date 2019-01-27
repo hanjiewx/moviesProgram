@@ -15,16 +15,18 @@ module.exports = {
     let record = ctx.request.body.record || null
 
     if (!isNaN(movieId)) {
-      await DB.query('INSERT INTO movieComment(user, username, avatar, content,record,  movie_id) VALUES (?, ?, ?, ?, ?,?)', [user, username, avatar, content, record,movieId])
+      await DB.query('INSERT INTO movieComment(user, username, avatar, content,record,  movie_id) VALUES (?, ?, ?, ?, ?,?)', [user, username, avatar, content, record, movieId])
     }
 
-    ctx.state.data = { 'query': `INSERT INTO movieComment(user, username, avatar, content,  movie_id) VALUES (${user}, ${username},${avatar} , ${content},${record}, ${movieId})`,
-    'user':user,
-    'username':username,
-    'avatar':avatar,
-    'body':ctx.request.body}
+    ctx.state.data = {
+      'query': `INSERT INTO movieComment(user, username, avatar, content,  movie_id) VALUES (${user}, ${username},${avatar} , ${content},${record}, ${movieId})`,
+      'user': user,
+      'username': username,
+      'avatar': avatar,
+      'body': ctx.request.body
+    }
   },
-  
+
   /**
    * 获取评论列表
    */
@@ -33,7 +35,7 @@ module.exports = {
     if (!isNaN(movieId)) {
       ctx.state.data = await DB.query('select * from movieComment where movieComment.movie_id =?', [movieId])
     } else {
-      ctx.state.data =[]
+      ctx.state.data = []
     }
 
   },

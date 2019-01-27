@@ -1,90 +1,111 @@
 /* pages/movieDetail/movieDetail.wxss */
-.all-wrapper{
-  width:750rpx;
-  height:1280rpx;
+
+.all-wrapper {
+  width: 750rpx;
+  height: 1280rpx;
   background-color: azure;
 }
-.movie-image{
-  width:250rpx;
-  height:350rpx;
+
+.movie-image {
+  width: 250rpx;
+  height: 350rpx;
   margin-left: 250rpx;
   margin-top: 50rpx;
-  position:absolute;
+  position: absolute;
 }
-.textAndBtn-wrapper{
+
+.textAndBtn-wrapper {
   background-color: white;
-  padding-top:300rpx;
+  padding-top: 300rpx;
   padding-left: 20rpx;
-  padding-right:20rpx;
-  width:630rpx;
-  height:700rpx;
-  border:2px solid rgb(230, 223, 223);
-  margin-top:120rpx; 
-  margin-left:38rpx; 
-  position:absolute;
+  padding-right: 20rpx;
+  width: 630rpx;
+  height: 650rpx;
+  border: 2px solid rgb(230, 223, 223);
+  margin-top: 120rpx;
+  margin-left: 38rpx;
+  position: absolute;
 }
 
-.text-wrapper{
- height:500rpx;  
+.text-wrapper {
+  height: 500rpx;
 }
-.title{
+
+.title {
   text-align: center;
-  font-weight: bold
-}
-.btn-wrapper{
-  font-size:30rpx; 
-  display:flex;
-}
-.addFavorite{
-padding-top:20rpx;
-padding-left:20rpx;
-padding-right:20rpx;
-padding-bottom:25rpx;
-margin-top:80rpx;
-margin-left:100rpx;
-border:2px solid rgb(230, 223, 223);
-}
-.addComment{
-padding-top:20rpx;
-padding-left:20rpx;
-padding-right:20rpx;
-padding-bottom:25rpx;
-margin-top:80rpx;
-margin-left:150rpx;
-border:2px solid rgb(230, 223, 223);
+  font-weight: bold;
 }
 
-.all-wrapper2{
- width:750rpx;
- height:855rpx;
- background-color: grey;  
+.btn-wrapper {
+  font-size: 30rpx;
+  display: flex;
 }
-.textAndBtn-wrapper2{
-  padding-top:300rpx;
+
+.addFavorite {
+  padding-top: 20rpx;
   padding-left: 20rpx;
-  padding-right:20rpx;
-  width:630rpx;
-  height:430rpx;
-  margin-top:120rpx; 
-  margin-left:38rpx; 
-  position:absolute; 
+  padding-right: 20rpx;
+  padding-bottom: 25rpx;
+  margin-top: 50rpx;
+  margin-left: 100rpx;
+  border: 2px solid rgb(230, 223, 223);
 }
-.userInfo{
-margin-top: 70rpx;
-display:flex;
+
+.addComment {
+  padding-top: 20rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-bottom: 25rpx;
+  margin-top: 50rpx;
+  margin-left: 150rpx;
+  border: 2px solid rgb(230, 223, 223);
 }
-.user-head{
+
+.all-wrapper2 {
+  width: 750rpx;
+  height: 800rpx;
+  background-color: grey;
+}
+
+.textAndBtn-wrapper2 {
+  padding-top: 300rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  width: 630rpx;
+  height: 250rpx;
+  margin-top: 120rpx;
+  margin-left: 38rpx;
+  position: absolute;
+}
+
+.userInfo {
+  margin-top: 70rpx;
+  display: flex;
+}
+
+.user-head {
   flex-shrink: 0;
   margin-left: 53rpx;
   height: 80rpx;
   width: 80rpx;
   border-radius: 50%;
 }
-.user-name{
-padding-top: 10rpx;
-margin-left: 30rpx;
+
+.user-name {
+  padding-top: 10rpx;
+  margin-left: 30rpx;
 }
-.comment{
+
+.comment {
   margin-top: 30rpx;
-  margin-left:53rpx;
+  margin-left: 53rpx;
+}
+
+.back {
+  margin-top: 20rpx;
+  text-align: center;
+  border: 2rpx solid green;
+  background-color: green;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
 }

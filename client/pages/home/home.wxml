@@ -5,8 +5,8 @@
     </navigator>
     <view class="text">{{title}}</view>
     <view class='userComment' bindtap='onTapCommentDetail' wx:if="{{commentList!=''}}">
-      <image class='user-head' src='{{commentList[0].avatar}}'></image>
-      <view class="comment">{{commentList[0].username}}给你推荐了一条影评</view>
+      <image class='user-head' src='{{avatar}}'></image>
+      <view class="comment">{{username}}给你推荐了一条影评</view>
     </view>
     <view class='pleaseadd' bindtap='addComment' wx:else>请添加影评</view>
   </view>

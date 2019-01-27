@@ -11,42 +11,42 @@
 </view>
 
 <view class="all-wrapper" wx:else>
-<view class='title-wrapper'>
-  <view class="myRelease" bindtap='ontapMyRelease' id='release'>我的发布</view>
-  <view class='myFavorite' bindtap='ontapMyFavorite' id='favorite'>我的收藏</view>
+  <view class='title-wrapper'>
+    <view class="myRelease" bindtap='ontapMyRelease' id='release'>我的发布</view>
+    <view class='myFavorite' bindtap='ontapMyFavorite' id='favorite'>我的收藏</view>
   </view>
   <view class="user-card2" wx:if="{{ontap=='release'}}">
     <view class='releaseList' wx:for="{{releaseList}}" wx:key="{{index}}">
       <navigator class='comment-card' url='../commentDetail/commentDetail?id={{item.movie_id}}'>
-       <view class="wrapper-titleAndComment">
-              <view class='comment-wrapper'>
-              <view class='comment' wx:if="{{item.content}}">{{item.content}}</view>
-              <view class='comment' bindtap='recordPlay' wx:if="{{item.record}}">点击播放</view>
-             <view class='userInfo'>
-             <image class="user-head" src="{{item.avatar}}"></image>
-             <view class='user-name'>{{item.username}}</view>
-             </view>
+        <view class="wrapper-titleAndComment">
+          <view class='comment-wrapper'>
+            <view class='comment' wx:if="{{item.content}}">{{item.content}}</view>
+            <view class='comment' bindtap='recordPlay' wx:if="{{item.record}}">点击播放</view>
+            <view class='userInfo'>
+              <image class="user-head" src="{{item.avatar}}"></image>
+              <view class='user-name'>{{item.username}}</view>
             </view>
-      </view>
-    </navigator> 
+          </view>
+        </view>
+      </navigator>
     </view>
   </view>
 
   <view class="user-card2" wx:if="{{ontap=='favorite'}}">
     <view class='favoriteList' wx:for="{{favoriteList}}" wx:key="{{index}}">
       <navigator class='comment-card' url='../commentDetail/commentDetail?id={{item.movie_id}}'>
-       <view class="wrapper-titleAndComment">
-              <view class='comment-wrapper'>
-              <view class='comment' wx:if="{{item.content}}">{{item.content}}</view>
-              <view class='comment' bindtap='recordPlay' wx:if="{{item.record}}">点击播放</view>
-             <view class='userInfo'>
-             <image class="user-head" src="{{item.avatar}}"></image>
-             <view class='user-name'>{{item.username}}</view>
-             </view>
+        <view class="wrapper-titleAndComment">
+          <view class='comment-wrapper'>
+            <view class='comment' wx:if="{{item.content}}">{{item.content}}</view>
+            <view class='comment' bindtap='recordPlay' wx:if="{{item.record}}">点击播放</view>
+            <view class='userInfo'>
+              <image class="user-head" src="{{item.avatar}}"></image>
+              <view class='user-name'>{{item.username}}</view>
             </view>
-      </view>
-    </navigator> 
+          </view>
+        </view>
+      </navigator>
     </view>
   </view>
 
-</view> 
+</view>

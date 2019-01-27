@@ -11,18 +11,17 @@
 </view>
 
 <view class='all-wrapper' wx:else>
-<view class='textAndBtn-wrapper'>
-<view class="text-wrapper">
-<view class='title'>{{movie.title}}</view>
-<view class="movie-text">{{movie.description}}</view>
+  <view class='textAndBtn-wrapper'>
+    <view class="text-wrapper">
+      <view class='title'>{{movie.title}}</view>
+      <view class="movie-text">{{movie.description}}</view>
+    </view>
+    <view class='btn-wrapper'>
+      <navigator url='../commentList/commentList?id={{id}}'>
+        <view class="checkComment" bindtap='checkComment'>查看影评</view>
+      </navigator>
+      <view class="addComment" bindtap='addComment'>添加影评</view>
+    </view>
+  </view>
+  <image class='movie-image' src="{{movie.image}}"></image>
 </view>
-<view class='btn-wrapper'>
-<navigator url='../commentList/commentList?id={{id}}'>
-<view class="checkComment" bindtap='checkComment'>查看影评</view>
-</navigator>
-<view class="addComment" bindtap='addComment' >添加影评</view>
-</view>
-</view>
-<image class='movie-image' src="{{movie.image}}"></image>
-</view>
-

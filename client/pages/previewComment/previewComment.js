@@ -17,7 +17,8 @@ Page({
     image: '',
     id: '',
     record: '',
-    commentList: ''
+    commentList: '',
+    isAdded: false
   },
 
   onTapLogin: function() {
@@ -39,26 +40,16 @@ Page({
   },
 
   onTapPlay() {
-  innerAudioContext.src = this.data.recordValue + '=' + this.data.duration + '.mp3'
+    innerAudioContext.src = this.data.recordValue + '=' + this.data.duration + '.mp3'
     innerAudioContext.play()
-    
+
     this.setData({
       record: innerAudioContext.src
     })
     console.log('record', this.data.record)
   },
 
-  addComment(event) {
- 
-    for (let i = 0; i < this.data.commentList.length; i++) {
-      if (this.data.commentList[i].user == this.data.userInfo.openId) {
-        console.log('j>0')
-        wx.navigateTo({
-          url: '../commentDetail/commentDetail?id=' + this.data.id
-        })
-      }
-      else {
-       
+  postComment() {
     wx.showLoading({
       title: '正在发表评论'
     })
@@ -86,6 +77,9 @@ Page({
               title: '发表评论失败123'
             })
           }
+          wx.navigateTo({
+            url: '../commentList/commentList?id=' + this.data.id,
+          })
         },
         fail: (e) => {
           wx.hideLoading()
@@ -112,19 +106,19 @@ Page({
             wx.hideLoading()
 
             let data = result.data
-
             if (!data.code) {
               wx.showToast({
                 title: '发表评论成功'
               })
-
-              
             } else {
               wx.showToast({
                 icon: 'none',
                 title: '发表评论失败'
               })
             }
+            wx.navigateTo({
+              url: '../commentList/commentList?id=' + this.data.id,
+            })
           },
           fail: () => {
             wx.hideLoading()
@@ -137,12 +131,31 @@ Page({
         })
       })
     }
-    wx.navigateTo({
-      url: '../commentList/commentList?id='+this.data.id,
+
+  },
+
+  addComment() {
+    if (this.data.isAdded) {
+      return
+    }
+    if (this.data.commentList.length == 0) {
+      this.postComment()
+      return
+    }
+    for (let i = 0; i < this.data.commentList.length; i++) {
+      if (this.data.commentList[i].user == this.data.userInfo.openId) {
+        console.log('j>0')
+        wx.navigateTo({
+          url: '../commentDetail/commentDetail?id=' + this.data.id
+        })
+      } else {
+        this.postComment()
+      }
+    }
+    this.setData({
+      isAdded: true
     })
-  }
-}
-},
+  },
 
   uploadRecord(cb) {
     let recordValue = this.data.record
@@ -153,12 +166,12 @@ Page({
         url: config.service.uploadUrl,
         filePath: recordValue,
         name: 'file',
-     
+
         success: res => {
           let data = JSON.parse(res.data)
           console.log(res)
           if (!data.code) {
-          record.push(data.data.imgUrl)
+            record.push(data.data.imgUrl)
             cb && cb(record)
           }
 

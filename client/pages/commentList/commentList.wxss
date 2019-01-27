@@ -1,26 +1,32 @@
 /* pages/commentList/commentlist.wxss */
+
 .comment-card {
-height:250rpx;
-border-bottom:2px solid rgb(230, 223, 223);
+  height: 250rpx;
+  border-bottom: 2px solid rgb(230, 223, 223);
 }
-.comment-card:last-child{
+
+.comment-card:last-child {
   border-bottom: none;
 }
-.userInfo{
-    margin-top: 70rpx;
-display:flex;
+
+.userInfo {
+  margin-top: 70rpx;
+  display: flex;
 }
-.user-head{
+
+.user-head {
   flex-shrink: 0;
   margin-left: 53rpx;
   height: 80rpx;
   width: 80rpx;
   border-radius: 50%;
 }
-.user-name{
-padding-top: 10rpx;
-margin-left: 30rpx;
+
+.user-name {
+  padding-top: 10rpx;
+  margin-left: 30rpx;
 }
-.comment{
-margin-left: 53rpx;
+
+.comment {
+  margin-left: 53rpx;
 }

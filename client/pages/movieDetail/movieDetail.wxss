@@ -25,7 +25,11 @@
 }
 
 .text-wrapper{
- height:500rpx;  
+
+text-overflow:ellipsis;
+white-space:no-wrap;
+height:280px;
+overflow:hidden;  
 }
 .title{
   text-align: center;
@@ -74,10 +78,7 @@ border:2px solid rgb(230, 223, 223);
   text-align: center;
  margin-top: 40rpx;
  border-bottom:2px solid rgb(230, 223, 223);
- text-overflow:ellipsis;
- white-space:no-wrap;
- height:100px;
- overflow:hidden;
+
 }
 
 .btn-sound{

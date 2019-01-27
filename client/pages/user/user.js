@@ -11,25 +11,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    columnTitle:['我的发布','我的收藏'],
+    columnTitle: ['我的发布', '我的收藏'],
     userInfo: null,
     locationAuthType: app.data.locationAuthType,
     releaseList: '',
-    favoriteList:'',
+    favoriteList: '',
     id: '',
-    ontap:''
+    ontap: ''
   },
 
-  
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  },
+  onLoad: function(options) {},
 
-  onTapLogin: function () {
+  onTapLogin: function() {
     app.login({
-      success: ({ userInfo }) => {
+      success: ({
+        userInfo
+      }) => {
         this.setData({
           userInfo,
           locationAuthType: app.data.locationAuthType,
@@ -69,7 +70,7 @@ Page({
     qcloud.request({
       url: config.service.favoriteList,
       success: result => {
-      
+
         let data = result.data
         if (!data.code) {
           this.setData({
@@ -80,27 +81,27 @@ Page({
             })
           })
         }
-  
+
         console.log(this.data.favoriteList)
       },
-      fail:error=>{
+      fail: error => {
         console.error(error)
       }
     })
   },
 
-//获取我的发布
-  ontapMyRelease(e){
+  //获取我的发布
+  ontapMyRelease(e) {
     let user = this.data.userInfo.openId
     this.getReleaseList(user)
     console.log(this.data.userInfo)
     this.setData({
-      ontap:e.currentTarget.id
+      ontap: e.currentTarget.id
     })
   },
 
 
-//获取我的收藏
+  //获取我的收藏
   ontapMyFavorite(e) {
     this.getFavoriteList()
     this.setData({
@@ -117,27 +118,29 @@ Page({
   //     innerAudioContext.src = this.data.releaseList.record
   //   } 
   //   innerAudioContext.play()
-  
+
   // },
 
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     // 同步授权状态
     this.setData({
       locationAuthType: app.data.locationAuthType
     })
     app.checkSession({
-      success: ({ userInfo }) => {
+      success: ({
+        userInfo
+      }) => {
         this.setData({
           userInfo
         })
@@ -149,35 +152,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -1,59 +1,70 @@
 /* pages/home/home.wxss */
-.wrapper-all{
-background-color: azure;
-position:absolute;
+
+.wrapper-all {
+  background-color: azure;
+  position: absolute;
 }
-.wrapper-picture{
- position: relative;
- height:1030rpx;
+
+.wrapper-picture {
+  position: relative;
+  height: 1030rpx;
 }
-.picture{
-  width:588rpx;
-  height:823rpx;
+
+.picture {
+  width: 588rpx;
+  height: 823rpx;
   margin-top: 20rpx;
   margin-left: 80rpx;
 }
-.text{
+
+.text {
   margin-top: 20rpx;
-  text-align: center
+  text-align: center;
 }
-.userComment{
- margin-left: 70rpx;
+
+.userComment {
+  margin-left: 70rpx;
   margin-top: 40rpx;
- display:flex;
- height:100rpx;
+  display: flex;
+  height: 100rpx;
 }
-.user-head{
+
+.user-head {
   flex-shrink: 0;
   margin-left: 53rpx;
   height: 80rpx;
   width: 80rpx;
   border-radius: 50%;
 }
-.comment{
-  margin-top:20rpx;
-  margin-left:10rpx;
+
+.comment {
+  margin-top: 20rpx;
+  margin-left: 10rpx;
   text-align: center;
-  font-size:35rpx;
+  font-size: 35rpx;
 }
-.tabBar{
-  width:750rpx;
+
+.tabBar {
+  width: 750rpx;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  display:flex;
-  margin-top:40rpx;
-  background-color:white
+  display: flex;
+  margin-top: 40rpx;
+  background-color: white;
 }
-.hot{
-padding-top: 30rpx;
-margin-left: 150rpx;
-padding-bottom: 20rpx;
+
+.hot {
+  padding-top: 30rpx;
+  margin-left: 150rpx;
+  padding-bottom: 20rpx;
 }
-.user{
-padding-top: 30rpx;
-margin-left: 290rpx;
-padding-bottom: 20rpx;
+
+.user {
+  padding-top: 30rpx;
+  margin-left: 290rpx;
+  padding-bottom: 20rpx;
 }
-.pleaseadd{
+
+.pleaseadd {
   text-align: center;
   margin-top: 30rpx;
 }

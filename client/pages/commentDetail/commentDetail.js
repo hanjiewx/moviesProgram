@@ -14,17 +14,22 @@ Page({
     id: '',
     userInfo: '',
     comment: '',
-    userhead:'',
-    username:"",
-    record:"",
+    userhead: '',
+    username: "",
+    record: "",
     favoriteList: '',
+    isFavorited: false
 
   },
-onPullDownRefresh(){
-  this.getMovieDetail(this.data.id,() => { wx.stopPullDownRefresh() })
-  this.getCommentList(this.data.id, () => { wx.stopPullDownRefresh() })
-},
-  getMovieDetail(id,callback) {
+  onPullDownRefresh() {
+    this.getMovieDetail(this.data.id, () => {
+      wx.stopPullDownRefresh()
+    })
+    this.getCommentList(this.data.id, () => {
+      wx.stopPullDownRefresh()
+    })
+  },
+  getMovieDetail(id, callback) {
     wx.showLoading({
       title: '电影数据加载中...',
     })
@@ -59,45 +64,108 @@ onPullDownRefresh(){
           wx.navigateBack()
         }, 2000)
       },
-         complete: () => {
+      complete: () => {
         callback && callback()
       }
     })
   },
 
-  addComment() {
-    let commentList = this.data.commentList
-    for (let i = 0; i < commentList.length; i++) {
-      if (commentList[i].user == this.data.userInfo.openId) {
-        console.log('j>0')
-        this.setData({
-          comment: commentList[i].content,
-          userhead: commentList[i].avatar,
-          username: commentList[i].username,
-          record: commentList[i].record
-        })
-      }
+  postComment() {
+    wx.showLoading({
+      title: '正在发表评论'
+    })
+    if (this.data.commentValue) {
+      qcloud.request({
+        url: config.service.addComment,
+        login: true,
+        method: 'PUT',
+        data: {
+          content: this.data.commentValue,
+          movie_id: this.data.id
+        },
+        success: result => {
+          wx.hideLoading()
 
-      else {
-        console.log('j=0')
-        let id = this.data.id
-        let title = this.data.movie.title
-        let image = this.data.movie.image
+          let data = result.data
+          if (!data.code) {
+            wx.showToast({
+              title: '发表评论成功'
+            })
 
-        wx.showActionSheet({
-          itemList: ['文字', '音频'],
-          success(res) {
-            if (res.tapIndex == 0 || 1) {
-              wx.navigateTo({
-                url: '../editComment/editComment?id=' + id + '&title=' + title + '&image=' + image + '&tapIndex=' + res.tapIndex,
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '发表评论失败123'
+            })
+          }
+          wx.navigateTo({
+            url: '../commentList/commentList?id=' + this.data.id,
+          })
+        },
+        fail: (e) => {
+          wx.hideLoading()
+
+          wx.showToast({
+            icon: 'none',
+            title: '发表评论失败456'
+          })
+          console.error(e)
+        }
+      })
+    }
+    if (this.data.recordValue) {
+      this.uploadRecord(record => {
+        qcloud.request({
+          url: config.service.addComment,
+          login: true,
+          method: 'PUT',
+          data: {
+            record,
+            movie_id: this.data.id
+          },
+          success: result => {
+            wx.hideLoading()
+
+            let data = result.data
+            if (!data.code) {
+              wx.showToast({
+                title: '发表评论成功'
+              })
+            } else {
+              wx.showToast({
+                icon: 'none',
+                title: '发表评论失败'
               })
             }
-
+            wx.navigateTo({
+              url: '../commentList/commentList?id=' + this.data.id,
+            })
           },
-          fail(res) {
-            console.log(res.errMsg)
+          fail: () => {
+            wx.hideLoading()
+
+            wx.showToast({
+              icon: 'none',
+              title: '发表评论失败'
+            })
           }
         })
+      })
+    }
+
+  },
+
+  addComment() {
+    if (this.data.commentList.length == 0) {
+      this.postComment()
+      return
+    }
+    for (let i = 0; i < this.data.commentList.length; i++) {
+      if (this.data.commentList[i].user == this.data.userInfo.openId) {
+        console.log('j>0')
+        return
+      } else {
+        this.postComment()
       }
     }
   },
@@ -124,15 +192,7 @@ onPullDownRefresh(){
       }
     })
   },
-addFavorite() {
-  for (let i = 0; i < this.data.favoriteList.length; i++) {
-    if (this.data.favoriteList[i].user == this.data.userInfo.openId) {
-        console.log('j>0')
-        wx.navigateTo({
-          url: '../myfavorite/myfavorite?id=' + this.data.id
-        })
-      }
-      else {
+  postFavorite() {
     wx.showLoading({
       title: '正在收藏评论'
     })
@@ -171,11 +231,30 @@ addFavorite() {
         })
       },
     })
-  }
-}
   },
 
-  getCommentList(id,callback) {
+  addFavorite() {
+    if (this.data.isFavorited) {
+      return
+    }
+    if (this.data.favoriteList.length == 0) {
+      this.postFavorite()
+      return
+    }
+    for (let i = 0; i < this.data.favoriteList.length; i++) {
+      if (this.data.favoriteList[i].user == this.data.userInfo.openId) {
+        console.log('j>0')
+        return
+      } else {
+        this.postFavorite()
+      }
+    }
+    this.setData({
+      isFavorited: true
+    })
+  },
+
+  getCommentList(id, callback) {
     qcloud.request({
       url: config.service.commentList,
       data: {
@@ -202,60 +281,60 @@ addFavorite() {
       }
     })
   },
-getmycomment(id){
-  qcloud.request({
-    url: config.service.commentList,
-    data: {
-      movie_id: id
-    },
-    success: result => {
-      let data = result.data
-      if (!data.code) {
-        this.setData({
-          commentList: data.data.map(item => {
-            let itemDate = new Date(item.create_time)
-            item.createTime = _.formatTime(itemDate)
-            return item
-          })
-        })
-        let commentList = this.data.commentList
-        for (let i = 0; i < commentList.length; i++) {
-          if (commentList[i].user == this.data.userInfo.openId) {
-            console.log('j>0')
-            this.setData({
-              comment: commentList[i].content,
-              userhead: commentList[i].avatar,
-              username: commentList[i].username,
-              record: commentList[i].record
+  getmycomment(id) {
+    qcloud.request({
+      url: config.service.commentList,
+      data: {
+        movie_id: id
+      },
+      success: result => {
+        let data = result.data
+        if (!data.code) {
+          this.setData({
+            commentList: data.data.map(item => {
+              let itemDate = new Date(item.create_time)
+              item.createTime = _.formatTime(itemDate)
+              return item
             })
+          })
+          let commentList = this.data.commentList
+          for (let i = 0; i < commentList.length; i++) {
+            if (commentList[i].user == this.data.userInfo.openId) {
+              console.log('j>0')
+              this.setData({
+                comment: commentList[i].content,
+                userhead: commentList[i].avatar,
+                username: commentList[i].username,
+                record: commentList[i].record
+              })
+            }
           }
         }
-      }
 
-    },
-    fail: error => {
-      console.error(error)
-    },
+      },
+      fail: error => {
+        console.error(error)
+      },
 
-  })
-},
-  onTapPlay(){
+    })
+  },
+  onTapPlay() {
     console.log(this.data.record)
-    innerAudioContext.obeyMuteSwitch=false
+    innerAudioContext.obeyMuteSwitch = false
     innerAudioContext.src = this.data.record
     innerAudioContext.play()
-    innerAudioContext.onError(e=>{
+    innerAudioContext.onError(e => {
       console.log(e)
     })
 
-    
+
   },
 
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     if (options.userName) {
       this.setData({
         id: options.id,
@@ -263,34 +342,32 @@ getmycomment(id){
         username: options.userName,
         comment: options.comment,
         record: options.record
-      })}
-      
- else{
+      })
+    } else {
       this.setData({
-        id: options.id})
+        id: options.id,
+        commentlist1: options.commentlist1,
+        userhead: options.commentlist1.avatar,
+        username: options.commentlist1.username,
+        comment: options.commentlist1.content,
+        record: options.commentlist1.record
+      })
      this.getmycomment(options.id)
-     
- }
-    this.getMovieDetail(this.data.id,'')
-    this.getCommentList(this.data.id,'')
-    
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
 
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+    }
+    this.getMovieDetail(this.data.id, '')
+    this.getCommentList(this.data.id, '')
+    this.getFavoriteList()
 
   },
+
+
+
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.setData({
       locationAuthType: app.data.locationAuthType
     })
@@ -305,38 +382,5 @@ getmycomment(id){
     })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

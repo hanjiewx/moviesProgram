@@ -7,20 +7,55 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName:'',
-    userHead:'',
-    comment:'',
-    record:'',
+    userName: '',
+    userHead: '',
+    comment: '',
+    record: '',
     commentList: '',
-    movieImage:'',
-    id:'',
-    title:'',
+    movieImage: '',
+    id: '',
+    title: '',
+    avatar: '',
+    username: ''
   },
   onPullDownRefresh() {
-    this.getMovie(() => { wx.stopPullDownRefresh() })
+    this.getMovieList(() => {
+      wx.stopPullDownRefresh()
+    })
   },
 
-  getMovie(callback){
+  getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  },
+
+  /*随机获取某部电影信息*/
+  getRandomMovie() {
+    let movielist = this.data.movieList;
+    let length = movielist.length;
+    let random = this.getRandomIntInclusive(0, length)
+    this.setData({
+      id: random + 1,
+      movieImage: movielist[random].image,
+      title: movielist[random].title
+    })
+    this.getCommentList(random + 1)
+  },
+  /*随机获取该电影的某条评论*/
+  getRandomComment() {
+    let commentlist = this.data.commentList;
+    let commentlength = commentlist.length;
+    let random1 = this.getRandomIntInclusive(0, commentlength)
+    console.log('random', random1)
+    this.setData({
+      avatar: commentlist[random1].avatar,
+      username: commentlist[random1].username,
+      commentlist1: commentlist[random1],
+    })
+  },
+
+  getMovieList(callback) {
     wx.showLoading({
       title: '电影数据加载中...',
     })
@@ -28,38 +63,33 @@ Page({
     qcloud.request({
       url: config.service.movieList,
       success: result => {
-        console.log(result)
         wx.hideLoading()
         let data = result.data
         if (!data.code) {
           this.setData({
-            movieImage: data.data[0].image,
-            id:data.data[0].id,
-            title: data.data[0].title
+            movieList: data.data
           })
+          this.getRandomMovie()
         } else {
           wx.showToast({
             icon: 'none',
-            title: '电影数据加载错误123',
+            title: '电影数据加载错误',
           })
         }
-      this.getCommentList(data.data[0].id)
       },
 
-      fail: e => {
-        console.error(e)
+      fail: () => {
         wx.hideLoading()
 
         wx.showToast({
           icon: 'none',
-          title: '电影数据加载错误456',
+          title: '电影数据加载错误',
         })
       },
-      complete:()=>{
+      complete: () => {
         callback && callback()
       }
     })
-    
   },
 
   getCommentList(id) {
@@ -77,10 +107,13 @@ Page({
         })
         if (!data.code) {
           this.setData({
-            commentList:commentList,
+            commentList: commentList,
           })
+          console.log('commentlist', this.data.commentlist)
+          if (this.data.commentList.length > 0) {
+            this.getRandomComment()
+          }
         }
-        console.log(this.data.commentList)
       },
       fail: error => {
         console.error(error)
@@ -90,6 +123,7 @@ Page({
 
   addComment() {
     let id = this.data.id
+    console.log('id', id)
     let title = this.data.title
     let image = this.data.movieImage
 
@@ -110,20 +144,20 @@ Page({
 
   },
 
-  
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-   this.getMovie()
+  onLoad: function(options) {
+    this.getMovieList()
     console.log(this.data.userName, this.data.userHead)
   },
-    /**
-       * 生命周期函数--监听页面初次渲染完成
-          */
-  onTapCommentDetail(){
-  wx.navigateTo({
-    url: '../commentDetail/commentDetail?id=' + this.data.id + '&commentList=' + this.data.commentList,
-  })
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onTapCommentDetail() {
+    wx.navigateTo({
+      url: '../commentDetail/commentDetail?id=' + this.data.id + '&commentlist1=' + this.data.commentlist1,
+    })
   }
 })

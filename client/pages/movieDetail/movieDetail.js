@@ -12,20 +12,26 @@ Page({
   data: {
     movie: '',
     id: '',
-    commentList:'',
+    commentList: '',
     userInfo: null,
     locationAuthType: app.data.locationAuthType,
-    
+
   },
 
   onPullDownRefresh() {
-    let id=this.data.id
-    this.getMovieDetail(id,() => { wx.stopPullDownRefresh() })
-    this.getCommentList(id, () => { wx.stopPullDownRefresh() })
+    let id = this.data.id
+    this.getMovieDetail(id, () => {
+      wx.stopPullDownRefresh()
+    })
+    this.getCommentList(id, () => {
+      wx.stopPullDownRefresh()
+    })
   },
-  onTapLogin: function () {
+  onTapLogin: function() {
     app.login({
-      success: ({ userInfo }) => {
+      success: ({
+        userInfo
+      }) => {
         this.setData({
           userInfo,
           locationAuthType: app.data.locationAuthType
@@ -39,7 +45,7 @@ Page({
     })
   },
 
-  getMovieDetail(id,callback) {
+  getMovieDetail(id, callback) {
     wx.showLoading({
       title: '电影数据加载中...',
     })
@@ -62,7 +68,7 @@ Page({
             wx.navigateBack()
           }, 2000)
         }
-        
+
       },
 
       fail: (e) => {
@@ -76,8 +82,8 @@ Page({
         }, 2000)
       },
       complete: () => {
-        callback&&callback()
-       }
+        callback && callback()
+      }
     })
   },
 
@@ -109,22 +115,20 @@ Page({
     })
   },
 
- checkComment(){
-   wx.navigateTo({
-      url: '../commentList/commentList?id='+this.data.id,
+  checkComment() {
+    wx.navigateTo({
+      url: '../commentList/commentList?id=' + this.data.id,
     })
- },
-  addComment(){
+  },
+  addComment() {
     if (this.data.commentList != '') {
       for (let i = 0; i < this.data.commentList.length; i++) {
         if (this.data.commentList[i].user == this.data.userInfo.openId) {
           console.log('j>0')
           wx.navigateTo({
-            url: '../commentDetail/commentDetail?id=' + this.data.id 
+            url: '../commentDetail/commentDetail?id=' + this.data.id
           })
-        }
-
-        else {
+        } else {
           let id = this.data.id
           let title = this.data.movie.title
           let image = this.data.movie.image
@@ -144,8 +148,8 @@ Page({
             }
           })
         }
-      }}
-else{
+      }
+    } else {
       let id = this.data.id
       let title = this.data.movie.title
       let image = this.data.movie.image
@@ -164,17 +168,17 @@ else{
           console.log(res.errMsg)
         }
       })
-}
+    }
   },
-  
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     this.setData({
       id: options.id,
-       onTap: false,
-       cancle: false
+      onTap: false,
+      cancle: false
     })
     console.log(this.data.id)
     this.getMovieDetail(this.data.id)
@@ -196,7 +200,9 @@ else{
       locationAuthType: app.data.locationAuthType
     })
     app.checkSession({
-      success: ({ userInfo }) => {
+      success: ({
+        userInfo
+      }) => {
         this.setData({
           userInfo
         })
@@ -204,5 +210,5 @@ else{
     })
   },
 
- 
+
 })

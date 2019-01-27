@@ -19,10 +19,10 @@ module.exports = {
     ctx.state.data = {}
   },
   /**
- * 获取收藏列表
- */
-favoriteList: async ctx => {
-  ctx.state.data = await DB.query("SELECT * FROM favoriteComment")
- 
-},
+   * 获取收藏列表
+   */
+  favoriteList: async ctx => {
+    ctx.state.data = await DB.query("SELECT * FROM favoriteComment")
+
+  },
 }

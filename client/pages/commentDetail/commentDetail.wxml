@@ -1,24 +1,23 @@
-
-<view class='all-wrapper' >
-<view class='textAndBtn-wrapper'>
-<view class="text-wrapper">
-<view class='title'>{{movie.title}}</view>
-<view class="comment-wrapper">
-<view class='userInfo'>
-<image class='user-head' src='{{userhead}}'></image>
-<view class='user-name'>{{username}}的影评</view>
+<view class='all-wrapper'>
+  <view class='textAndBtn-wrapper'>
+    <view class="text-wrapper">
+      <view class='title'>{{movie.title}}</view>
+      <view class="comment-wrapper">
+        <view class='userInfo'>
+          <image class='user-head' src='{{userhead}}'></image>
+          <view class='user-name'>{{username}}的影评</view>
+        </view>
+        <view class='comment' wx:if="{{comment!=('null'||'')}}">{{comment}}</view>
+        <view class='record' bindtap='onTapPlay' wx:else>点击播放</view>
+      </view>
+    </view>
+    <view class='btn-wrapper'>
+      <view class="addFavorite" bindtap='addFavorite'>收藏影评</view>
+      <view class="addComment" bindtap='addComment'>添加影评</view>
+    </view>
+    <navigator url="../home/home">
+      <view class='back'>返回首页</view>
+    </navigator>
+  </view>
+  <image class='movie-image' src="{{movie.image}}"></image>
 </view>
-<view class='comment' wx:if="{{comment!=('null'||'')}}">{{comment}}</view>
-<view class='record' bindtap='onTapPlay' wx:else>点击播放</view>
-</view>
-</view>
-<view class='btn-wrapper'>
-<view class="addFavorite" bindtap='addFavorite'>收藏影评</view>
-<view class="addComment" bindtap='addComment' >添加影评</view>
-</view>
-</view>
-<image class='movie-image' src="{{movie.image}}"></image>
-</view>
-
-
-

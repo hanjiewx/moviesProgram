@@ -6,32 +6,31 @@
       <view class="unlogin-tips">点击微信登录后可编辑影评</view>
     </view>
   </view>
-   <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
-   <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
+  <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
+  <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
 </view>
 
 
 <view class='all-wrapper'>
-<view class='textAndBtn-wrapper'>
-<view class="text-wrapper">
-<view class='title'>{{title}}</view>
-<view class='comment-wrapper'>
-<view class='userHeadName'>
-<image class='user-head' src="{{userInfo.avatarUrl}}"></image>
-<view class='user-name'>{{userInfo.nickName}}的影评</view>
-</view>
-<view class='commentValue' wx:if="{{commentValue}}">{{commentValue}}</view>
-<view class='recordValue' bindtap="onTapPlay" wx:if="{{recordValue}}">点击播放</view>
-</view>
-</view>
-<view class='btn-wrapper'>
+  <view class='textAndBtn-wrapper'>
+    <view class="text-wrapper">
+      <view class='title'>{{title}}</view>
+      <view class='comment-wrapper'>
+        <view class='userHeadName'>
+          <image class='user-head' src="{{userInfo.avatarUrl}}"></image>
+          <view class='user-name'>{{userInfo.nickName}}的影评</view>
+        </view>
+        <view class='commentValue' wx:if="{{commentValue}}">{{commentValue}}</view>
+        <view class='recordValue' bindtap="onTapPlay" wx:if="{{recordValue}}">点击播放</view>
+      </view>
+    </view>
+    <view class='btn-wrapper'>
 
-<navigator open-type='navigateBack' delta='1'>
-<view class='reEdit'>重新编辑</view>
-</navigator>
-<view class='addComment' bindtap='addComment'>发布影评</view>
+      <navigator open-type='navigateBack' delta='1'>
+        <view class='reEdit'>重新编辑</view>
+      </navigator>
+      <view class='addComment' bindtap='addComment'>发布影评</view>
+    </view>
+  </view>
+  <image class='movie-image' src="{{image}}"></image>
 </view>
-</view>
-<image class='movie-image' src="{{image}}"></image>
-</view>
-
