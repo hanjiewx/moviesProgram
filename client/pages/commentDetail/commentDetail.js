@@ -41,7 +41,7 @@ Page({
         let data = result.data
         if (!data.code) {
           this.setData({
-            movie: data.data
+            movie: data.data,
           })
         } else {
           wx.showToast({
@@ -343,7 +343,9 @@ Page({
         comment: options.comment,
         record: options.record
       })
-    } else {
+      this.getMovieDetail(this.data.id, '')
+    }
+    else if (options.commentlist1) {
       this.setData({
         id: options.id,
         commentlist1: options.commentlist1,
@@ -352,10 +354,15 @@ Page({
         comment: options.commentlist1.content,
         record: options.commentlist1.record
       })
-     this.getmycomment(options.id)
-
+      this.getMovieDetail(this.data.id, '')
     }
-    this.getMovieDetail(this.data.id, '')
+    else{
+      this.setData({ id: options.id,})
+      this.getMovieDetail(options.id, '')
+      this.getmycomment(options.id) 
+     
+      console.log('movie',this.data.movie)
+    }
     this.getCommentList(this.data.id, '')
     this.getFavoriteList()
 

@@ -1,3 +1,4 @@
+<view class='comment-wrapper' wx:if="{{commentList}}" >
 <view class='comment-card' wx:for="{{commentList}}" wx:key="{{id}}">
   <navigator url='../commentDetail/commentDetail?id={{id}}&userHead={{item.avatar}}&userName={{item.username}}&comment={{item.content}}&record={{item.record}}'>
     <view class='userInfo'>
@@ -8,3 +9,5 @@
     <view class='record' wx:if="{{item.record}}">点击播放</view>
   </navigator>
 </view>
+</view>
+<view class='tip' wx:else> 暂时没有影评,请添加 </view>
