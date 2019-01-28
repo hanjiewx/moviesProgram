@@ -8,7 +8,7 @@
           <view class='user-name'>{{username}}的影评</view>
         </view>
         <view class='comment' wx:if="{{comment!=('null'||'')}}">{{comment}}</view>
-        <view class='record' bindtap='onTapPlay' wx:else>点击播放</view>
+        <view class='record' wx:elif="{{record!=('null'||'')}}" bindtap='onTapPlay'>点击播放</view>
       </view>
     </view>
     <view class='btn-wrapper'>
