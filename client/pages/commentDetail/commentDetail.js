@@ -242,7 +242,7 @@ Page({
       return
     }
     for (let i = 0; i < this.data.favoriteList.length; i++) {
-      if (this.data.favoriteList[i].user == this.data.userInfo.openId) {
+      if (this.data.favoriteList[i].user == this.data.userInfo.openId && this.data.id == this.data.favoriteList[i].movie_id) {
         console.log('j>0')
         return
       } else {
@@ -348,11 +348,11 @@ Page({
     else if (options.commentlist1) {
       this.setData({
         id: options.id,
-        commentlist1: options.commentlist1,
-        userhead: options.commentlist1.avatar,
-        username: options.commentlist1.username,
-        comment: options.commentlist1.content,
-        record: options.commentlist1.record
+        commentlist1: JSON.parse(options.commentlist1),
+        userhead: JSON.parse(options.commentlist1).avatar,
+        username: JSON.parse(options.commentlist1).username,
+        comment: JSON.parse(options.commentlist1).content,
+        record: JSON.parse(options.commentlist1).record
       })
       this.getMovieDetail(this.data.id, '')
     }

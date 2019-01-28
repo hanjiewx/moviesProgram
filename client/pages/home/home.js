@@ -157,7 +157,7 @@ Page({
    */
   onTapCommentDetail() {
     wx.navigateTo({
-      url: '../commentDetail/commentDetail?id=' + this.data.id + '&commentlist1=' + this.data.commentlist1,
+      url: '../commentDetail/commentDetail?id=' + this.data.id + '&commentlist1=' + JSON.stringify(this.data.commentlist1),
     })
   }
 })

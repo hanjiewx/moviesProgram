@@ -102,7 +102,7 @@
 }
 
 .back {
-  margin-top: 30rpx;
+  margin-top: 90rpx;
   text-align: center;
   border: 2rpx solid green;
   background-color: green;
